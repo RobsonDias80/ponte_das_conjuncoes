@@ -4,173 +4,569 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A Ponte das Conjunções</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Canvas Confetti for celebratory animations -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Inter:wght@400;500;600;700&display=swap');
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #e0f2fe 0%, #bae6fd 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
-        .font-fun {
-            font-family: 'Fredoka', cursive, sans-serif;
+        header {
+            background: linear-gradient(90deg, #0284c7, #0369a1);
+            color: white;
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
-        @keyframes bounce-short {
+        header h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+        header p {
+            color: #e0f2fe;
+            font-size: 0.95rem;
+        }
+        main {
+            max-width: 780px;
+            width: 100%;
+            margin: 24px auto;
+            padding: 0 16px;
+            flex: 1;
+        }
+        .card {
+            background: #ffffff;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(2, 132, 199, 0.12);
+            padding: 28px;
+            border: 2px solid #e0f2fe;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .text-center {
+            text-align: center;
+        }
+        /* Bridge Graphic Scene */
+        .scene-container {
+            position: relative;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(180deg, #bae6fd 0%, #7dd3fc 65%, #0284c7 65%, #0369a1 100%);
+            border-radius: 16px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 3px solid #38bdf8;
+            box-shadow: inset 0 -8px 16px rgba(0,0,0,0.1);
+        }
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 50px;
+            height: 22px;
+            width: 65px;
+            top: 15px;
+        }
+        .cloud-1 { left: 12%; animation: floatCloud 18s infinite alternate ease-in-out; }
+        .cloud-2 { right: 18%; top: 25px; width: 80px; animation: floatCloud 22s infinite alternate-reverse ease-in-out; }
+        @keyframes floatCloud {
+            from { transform: translateX(-15px); }
+            to { transform: translateX(15px); }
+        }
+        .bank {
+            position: absolute;
+            bottom: 25%;
+            width: 14%;
+            height: 36px;
+            background: #16a34a;
+            border-top: 6px solid #4ade80;
+            z-index: 2;
+        }
+        .bank-left { left: 0; border-radius: 0 12px 0 0; }
+        .bank-right { right: 0; border-radius: 12px 0 0 0; }
+        .tree {
+            position: absolute;
+            bottom: 48%;
+            font-size: 2.2rem;
+            z-index: 3;
+            line-height: 1;
+        }
+        .tree-left { left: 2%; }
+        .tree-right { right: 2%; }
+        .bridge-structure {
+            position: absolute;
+            bottom: 34%;
+            left: 13%;
+            width: 74%;
+            height: 18px;
+            display: flex;
+            gap: 3px;
+            z-index: 2;
+            align-items: center;
+        }
+        .bridge-rail {
+            position: absolute;
+            bottom: 45%;
+            left: 13%;
+            width: 74%;
+            height: 16px;
+            border-top: 3px dashed #92400e;
+            border-left: 4px solid #78350f;
+            border-right: 4px solid #78350f;
+            z-index: 1;
+        }
+        .plank {
+            flex: 1;
+            height: 12px;
+            background: #cbd5e1;
+            border-radius: 3px;
+            border: 1px solid #94a3b8;
+            transition: all 0.35s ease;
+        }
+        .plank.done {
+            background: #b45309;
+            border-color: #78350f;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .plank.current {
+            background: #fbbf24;
+            border-color: #d97706;
+            transform: scaleY(1.25);
+        }
+        .characters {
+            position: absolute;
+            bottom: 44%;
+            left: 4%;
+            font-size: 1.85rem;
+            z-index: 4;
+            transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 3px 3px rgba(0,0,0,0.25));
+            white-space: nowrap;
+        }
+        .characters.hop {
+            animation: charHop 0.45s ease;
+        }
+        @keyframes charHop {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            50% { transform: translateY(-16px) scale(1.08); }
         }
-        .animate-bounce-short {
-            animation: bounce-short 0.5s ease-in-out infinite;
+        .water-waves {
+            position: absolute;
+            bottom: 6px;
+            width: 100%;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.45);
+            font-size: 0.85rem;
+            letter-spacing: 6px;
+            user-select: none;
+        }
+        /* Forms & Inputs */
+        .form-box {
+            max-width: 420px;
+            margin: 20px auto 24px;
+            background: #f0f9ff;
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid #bae6fd;
+            text-align: left;
+        }
+        .form-group {
+            margin-bottom: 14px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        label {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #0369a1;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+        input, select {
+            width: 100%;
+            padding: 11px 14px;
+            border: 2px solid #bae6fd;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            background: white;
+            color: #1e293b;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input:focus, select:focus {
+            border-color: #0284c7;
+        }
+        input[readonly] {
+            background: #f1f5f9;
+            color: #64748b;
+            cursor: not-allowed;
+        }
+        /* Buttons */
+        .btn {
+            background: #0284c7;
+            color: white;
+            font-weight: 700;
+            padding: 14px 28px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
+            transition: all 0.2s;
+        }
+        .btn:hover {
+            background: #0369a1;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #334155;
+            box-shadow: none;
+        }
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+        /* Progress Header */
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .badge {
+            background: #e0f2fe;
+            color: #0369a1;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 6px 14px;
+            border-radius: 999px;
+        }
+        .progress-track {
+            width: 100%;
+            height: 12px;
+            background: #f1f5f9;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            border: 1px solid #e2e8f0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0284c7, #10b981);
+            width: 7%;
+            transition: width 0.35s ease;
+            border-radius: 999px;
+        }
+        /* Question Area */
+        .question-box {
+            background: #f8fafc;
+            border: 2px solid #e0f2fe;
+            border-radius: 16px;
+            padding: 22px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .question-instruction {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #0284c7;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .sentence-text {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #0f172a;
+            line-height: 1.5;
+        }
+        .blank-slot {
+            display: inline-block;
+            padding: 2px 14px;
+            margin: 0 4px;
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 2px dashed #0284c7;
+            border-radius: 8px;
+            font-weight: 800;
+        }
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        @media (max-width: 520px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .opt-btn {
+            background: white;
+            border: 2px solid #cbd5e1;
+            border-radius: 14px;
+            padding: 16px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .opt-btn:hover:not(:disabled) {
+            border-color: #0284c7;
+            background: #f0f9ff;
+            transform: translateY(-2px);
+        }
+        .opt-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.85;
+        }
+        .opt-correct {
+            border-color: #16a34a !important;
+            background: #dcfce7 !important;
+            color: #14532d !important;
+        }
+        .opt-wrong {
+            border-color: #dc2626 !important;
+            background: #fee2e2 !important;
+            color: #7f1d1d !important;
+        }
+        .feedback {
+            padding: 16px;
+            border-radius: 14px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.45;
+        }
+        .feedback.success {
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+        .feedback.error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+        /* Score & Ranking */
+        .score-display {
+            background: #f0f9ff;
+            border: 2px solid #bae6fd;
+            padding: 20px;
+            border-radius: 18px;
+            max-width: 280px;
+            margin: 16px auto 24px;
+        }
+        .score-number {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: #0369a1;
+            display: block;
+            margin: 4px 0;
+        }
+        .ranking-box {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 18px;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        .ranking-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            background: white;
+            border: 1px solid #f1f5f9;
+            font-size: 0.92rem;
+            font-weight: 600;
+        }
+        .ranking-row.highlight {
+            background: #e0f2fe;
+            border-color: #7dd3fc;
+            color: #0c4a6e;
+        }
+        .review-item {
+            padding: 16px;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+        .review-item.ok {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+        }
+        .review-item.fail {
+            background: #fef2f2;
+            border-color: #fecaca;
+        }
+        footer {
+            text-align: center;
+            padding: 16px;
+            font-size: 0.8rem;
+            color: #475569;
+        }
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 9999;
         }
     </style>
 </head>
-<body class="bg-cyan-50 min-h-screen text-slate-800 flex flex-col justify-between">
+<body>
 
-    <!-- Header -->
-    <header class="bg-cyan-600 text-white shadow-md py-6 px-4">
-        <div class="max-w-3xl mx-auto text-center">
-            <h1 class="font-fun text-3xl md:text-4xl tracking-wide mb-1">🌉 A Ponte das Conjunções</h1>
-            <p class="text-cyan-100 text-sm md:text-base">EEIEF Antônio Albuquerque Sousa Filho • Desafio dos Colegas na Ponte</p>
-        </div>
+    <canvas id="confetti-canvas"></canvas>
+
+    <header>
+        <h1>🌉 A Ponte das Conjunções</h1>
+        <p>EEIEF Antônio Albuquerque Sousa Filho • Desafio Interativo</p>
     </header>
 
-    <!-- Main Container -->
-    <main class="max-w-3xl w-full mx-auto p-4 md:p-6 my-6">
-        
-        <!-- Welcome Screen & Identification -->
-        <div id="welcome-screen" class="bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center transition-all duration-300">
-            <div class="inline-block p-4 bg-cyan-100 text-cyan-600 rounded-full mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-            </div>
-            <h2 class="font-fun text-2xl text-cyan-900 mb-3">Ajude os Colegas a Atravessar a Ponte!</h2>
-            <p class="text-slate-600 mb-6 max-w-lg mx-auto">O João e a Maria precisam cruzar o lago das conjunções, mas só conseguem dar passos seguros quando você escolhe a ponte certa (a conjunção correta). Vamos ajudá-los?</p>
-            
-            <div class="max-w-sm mx-auto space-y-4 mb-8 text-left bg-cyan-50 p-6 rounded-2xl">
-                <div>
-                    <label class="block text-xs font-semibold text-cyan-700 uppercase mb-1">Nome Completo</label>
-                    <input type="text" id="student-name" placeholder="Ex: Maria Clara Silva" class="w-full px-3 py-2.5 border border-cyan-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm bg-white">
+    <main>
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="card text-center">
+            <div class="scene-container">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="tree tree-left">🌲</div>
+                <div class="bank bank-left"></div>
+                <div class="bridge-rail"></div>
+                <div class="bridge-structure">
+                    <div class="plank done"></div><div class="plank done"></div><div class="plank done"></div>
+                    <div class="plank current"></div><div class="plank"></div><div class="plank"></div>
+                    <div class="plank"></div><div class="plank"></div><div class="plank"></div>
                 </div>
-                <div class="grid grid-cols-2 gap-4">
+                <div class="characters" style="left: 18%;">👦👧</div>
+                <div class="bank bank-right"></div>
+                <div class="tree tree-right">🌳</div>
+                <div class="water-waves">≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈</div>
+            </div>
+
+            <h2 style="font-size: 1.6rem; color: #0c4a6e; margin-bottom: 8px;">Ajude o João e a Maria a Atravessarem!</h2>
+            <p style="color: #475569; max-width: 540px; margin: 0 auto; font-size: 0.95rem; line-height: 1.5;">
+                Cada conjunção funciona como uma tábua firme na ponte que liga uma ideia à outra. Escolha a conjunção correta em cada frase para que os dois colegas atravessem o lago em segurança!
+            </p>
+
+            <div class="form-box">
+                <div class="form-group">
+                    <label>Nome Completo do Estudante</label>
+                    <input type="text" id="student-name" placeholder="Ex: Ana Clara Souza">
+                </div>
+                <div class="form-row">
                     <div>
-                        <label class="block text-xs font-semibold text-cyan-700 uppercase mb-1">Série</label>
-                        <input type="text" id="student-grade" value="Ensino Fundamental" readonly class="w-full px-3 py-2.5 border border-cyan-200 rounded-xl bg-slate-100 text-sm font-medium text-slate-600 cursor-not-allowed">
+                        <label>Série</label>
+                        <input type="text" id="student-grade" value="Ensino Fundamental" readonly>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-cyan-700 uppercase mb-1">Turma</label>
-                        <select id="student-class" class="w-full px-3 py-2.5 border border-cyan-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm bg-white">
-                            <option value="Turma C">Turma C</option>
+                        <label>Turma</label>
+                        <select id="student-class">
                             <option value="Turma A">Turma A</option>
                             <option value="Turma B">Turma B</option>
+                            <option value="Turma C" selected>Turma C</option>
                             <option value="Turma D">Turma D</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <button onclick="startQuiz()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-base">
-                Começar Aventura 👦👧🌉
-            </button>
+            <button class="btn" onclick="startQuiz()">Começar Travessia 👦👧🌉</button>
         </div>
 
         <!-- Quiz Screen -->
-        <div id="quiz-screen" class="hidden bg-white rounded-2xl shadow-xl p-6 md:p-8">
-            <!-- Progress Bar & Bridge Visual -->
-            <div class="mb-6 border-b pb-4">
-                <div class="flex justify-between items-center mb-2">
-                    <span id="question-counter" class="text-sm font-bold text-cyan-700 uppercase tracking-wider">Questão 1 de 15</span>
-                    <span id="score-badge" class="text-xs bg-cyan-100 text-cyan-800 font-semibold px-3 py-1 rounded-full">Pontos: 0</span>
-                </div>
-                
-                <!-- Visual Bridge Progress simulation -->
-                <div class="flex justify-between items-center bg-cyan-50 px-4 py-2 rounded-xl mb-3 text-xs font-semibold text-cyan-800 border border-cyan-100">
-                    <span>🌲 Margem Inicial</span>
-                    <span id="bridge-status-text" class="text-cyan-700">👦👧 Caminhando na ponte... (Passo 1/15)</span>
-                    <span>🌳 Outro Lado</span>
-                </div>
-
-                <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
-                    <div id="progress-bar" class="bg-cyan-600 h-full transition-all duration-300 rounded-full" style="width: 7%;"></div>
-                </div>
+        <div id="quiz-screen" class="card hidden">
+            <div class="top-bar">
+                <span id="question-counter" style="font-weight: 800; color: #0284c7; font-size: 0.9rem; text-transform: uppercase;">Passo 1 de 15</span>
+                <span id="score-badge" class="badge">Pontos: 0</span>
             </div>
 
-            <!-- Question Container -->
-            <div id="question-container" class="mb-6">
-                <!-- Dynamically injected question content -->
+            <!-- Interactive Bridge Graphic -->
+            <div class="scene-container">
+                <div class="cloud cloud-1"></div>
+                <div class="cloud cloud-2"></div>
+                <div class="tree tree-left">🌲</div>
+                <div class="bank bank-left"></div>
+                <div class="bridge-rail"></div>
+                <div id="bridge-planks" class="bridge-structure"></div>
+                <div id="characters-sprite" class="characters">👦👧</div>
+                <div class="bank bank-right"></div>
+                <div class="tree tree-right">🌳🌟</div>
+                <div class="water-waves">≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈</div>
             </div>
 
-            <!-- Options Container -->
-            <div id="options-container" class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-                <!-- Dynamically injected options -->
+            <div class="progress-track">
+                <div id="progress-bar" class="progress-fill"></div>
             </div>
 
-            <!-- Feedback Box -->
-            <div id="feedback-box" class="hidden p-4 rounded-xl mb-6 text-sm font-medium"></div>
+            <div id="question-container" class="question-box"></div>
 
-            <!-- Navigation Button -->
-            <div class="flex justify-end">
-                <button id="next-btn" onclick="nextQuestion()" class="hidden bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow transition">
-                    Próximo Passo na Ponte ➡️
-                </button>
+            <div id="options-container" class="options-grid"></div>
+
+            <div id="feedback-box" class="feedback hidden"></div>
+
+            <div style="text-align: right;">
+                <button id="next-btn" class="btn hidden" onclick="nextQuestion()">Dar Próximo Passo ➡️</button>
             </div>
         </div>
 
-        <!-- Result & Leaderboard Screen -->
-        <div id="result-screen" class="hidden bg-white rounded-2xl shadow-xl p-6 md:p-8 text-center">
-            <div class="inline-block p-4 bg-green-100 text-green-600 rounded-full mb-3 animate-bounce-short">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-            </div>
-            <h2 class="font-fun text-3xl text-cyan-900 mb-1">🎉 Travessia Concluída com Sucesso!</h2>
-            <p class="text-slate-600 text-sm mb-2">O João e a Maria cruzaram a ponte sãos e salvos graças a você!</p>
-            <p id="result-student-info" class="text-slate-600 font-medium mb-4 text-sm"></p>
-            
-            <div class="bg-cyan-50 p-5 rounded-2xl max-w-xs mx-auto mb-6">
-                <span class="block text-xs uppercase tracking-wider text-cyan-700 font-bold mb-1">Sua Pontuação</span>
-                <span id="final-score" class="text-4xl font-extrabold text-cyan-900">0 / 15</span>
-                <p id="final-message" class="text-slate-600 text-xs mt-1">Excelente desempenho!</p>
+        <!-- Result Screen -->
+        <div id="result-screen" class="card text-center hidden">
+            <div style="font-size: 3.4rem; margin-bottom: 8px;">🎉👦👧🌳</div>
+            <h2 style="font-size: 1.8rem; color: #0c4a6e; margin-bottom: 6px;">Travessia Concluída!</h2>
+            <p id="result-student-info" style="color: #475569; font-weight: 600; font-size: 0.95rem;"></p>
+
+            <div class="score-display">
+                <span style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #0284c7;">Pontuação Final</span>
+                <span id="final-score" class="score-number">0 / 15</span>
+                <p id="final-message" style="font-size: 0.85rem; color: #334155;"></p>
             </div>
 
-            <!-- Ranking / Leaderboard Section -->
-            <div class="mb-8 text-left bg-slate-50 border border-slate-200 rounded-2xl p-5">
-                <div class="flex items-center justify-between mb-3">
-                    <h3 class="font-fun text-lg text-cyan-900 flex items-center gap-2">
-                        🏆 Ranking dos Exploradores
-                    </h3>
-                    <span class="text-xs text-slate-500">Atualizado ao vivo</span>
+            <div class="ranking-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="font-size: 1.1rem; color: #0c4a6e;">🏆 Ranking da Turma</h3>
+                    <span style="font-size: 0.75rem; color: #64748b;">Salvo neste dispositivo</span>
                 </div>
-                <div id="ranking-list" class="space-y-2 max-h-48 overflow-y-auto pr-1">
-                    <!-- Leaderboard entries -->
-                </div>
+                <div id="ranking-list"></div>
             </div>
 
-            <div class="flex flex-wrap justify-center gap-3">
-                <button onclick="restartQuiz()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow transition text-sm">
-                    Refazer Aventura
-                </button>
-                <button onclick="reviewAnswers()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-6 py-2.5 rounded-xl transition text-sm">
-                    Revisar Frases
-                </button>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn" onclick="restartQuiz()">Jogar Novamente 🔄</button>
+                <button class="btn btn-secondary" onclick="reviewAnswers()">Revisar Frases 📋</button>
             </div>
         </div>
 
         <!-- Review Screen -->
-        <div id="review-screen" class="hidden bg-white rounded-2xl shadow-xl p-6 md:p-8">
-            <h2 class="font-fun text-2xl text-cyan-900 mb-6 text-center">Revisão da Jornada</h2>
-            <div id="review-list" class="space-y-6 mb-6"></div>
+        <div id="review-screen" class="card hidden">
+            <h2 style="font-size: 1.5rem; color: #0c4a6e; margin-bottom: 18px; text-align: center;">Revisão das Frases</h2>
+            <div id="review-list" style="margin-bottom: 20px;"></div>
             <div class="text-center">
-                <button onclick="backToResult()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow transition">
-                    Voltar aos Resultados
-                </button>
+                <button class="btn" onclick="backToResult()">Voltar ao Resultado</button>
             </div>
         </div>
-
     </main>
 
-    <!-- Footer -->
-    <footer class="text-center py-4 text-xs text-slate-500">
+    <footer>
         EEIEF Antônio Albuquerque Sousa Filho • Professor Robson Dias
     </footer>
 
@@ -181,105 +577,105 @@
                 sentence: "Estudei bastante, [BLANK] consegui tirar uma boa nota.",
                 correct: "por isso",
                 options: ["por isso", "mas", "e", "ou"],
-                rationale: "A conjunção 'por isso' expressa a conclusão ou consequência lógica de ter estudado bastante[cite: 6]."
+                rationale: "A conjunção 'por isso' expressa a conclusão ou consequência de ter estudado bastante."
             },
             {
                 number: 2,
                 sentence: "João queria brincar, [BLANK] precisava terminar a tarefa.",
                 correct: "mas",
                 options: ["mas", "portanto", "ou", "e"],
-                rationale: "A conjunção 'mas' indica oposição ou contraste entre querer brincar e a necessidade de terminar a tarefa[cite: 6]."
+                rationale: "A conjunção 'mas' indica oposição entre querer brincar e precisar terminar a tarefa."
             },
             {
                 number: 3,
                 sentence: "Você prefere suco [BLANK] refrigerante?",
                 correct: "ou",
                 options: ["ou", "e", "pois", "logo"],
-                rationale: "A conjunção 'ou' indica uma ideia de alternância ou escolha entre duas opções[cite: 6]."
+                rationale: "A conjunção 'ou' indica alternância ou escolha entre duas opções."
             },
             {
                 number: 4,
                 sentence: "Maria não foi à escola, [BLANK] estava doente.",
                 correct: "porque",
                 options: ["porque", "mas", "então", "nem"],
-                rationale: "A conjunção 'porque' introduz a justificativa ou causa de Maria não ter ido à escola[cite: 6]."
+                rationale: "A conjunção 'porque' explica a causa ou motivo de Maria não ter ido à escola."
             },
             {
                 number: 5,
                 sentence: "O aluno leu o texto [BLANK] respondeu às questões.",
                 correct: "e",
                 options: ["e", "mas", "ou", "porém"],
-                rationale: "A conjunção 'e' liga duas ações que se somam em sequência[cite: 6]."
+                rationale: "A conjunção 'e' adiciona e soma duas ações feitas pelo aluno."
             },
             {
                 number: 6,
                 sentence: "Não gosto de mentira, [BLANK] de injustiça.",
                 correct: "nem",
                 options: ["nem", "e", "mas", "portanto"],
-                rationale: "A conjunção 'nem' soma ideias negativas[cite: 6]."
+                rationale: "A conjunção 'nem' adiciona uma segunda ideia negativa ('e não')."
             },
             {
                 number: 7,
                 sentence: "Choveu muito, [BLANK] o jogo foi cancelado.",
                 correct: "portanto",
                 options: ["portanto", "mas", "porque", "ou"],
-                rationale: "A conjunção 'portanto' expressa a consequência direta da chuva intensa[cite: 6]."
+                rationale: "A conjunção 'portanto' indica a conclusão ou consequência da chuva forte."
             },
             {
                 number: 8,
                 sentence: "Ana queria sair, [BLANK] sua mãe não deixou.",
                 correct: "porém",
                 options: ["porém", "e", "logo", "pois"],
-                rationale: "A conjunção 'porém' estabelece oposição entre a vontade de sair e a recusa da mãe[cite: 6]."
+                rationale: "A conjunção 'porém' expressa contraste ou oposição."
             },
             {
                 number: 9,
                 sentence: "Preste atenção, [BLANK] a explicação é importante.",
                 correct: "pois",
                 options: ["pois", "mas", "ou", "então"],
-                rationale: "A conjunção 'pois' justifica o motivo de se prestar atenção[cite: 6]."
+                rationale: "A conjunção 'pois' justifica por que é necessário prestar atenção."
             },
             {
                 number: 10,
                 sentence: "Ele treinou todos os dias, [BLANK] venceu a competição.",
                 correct: "logo",
                 options: ["logo", "mas", "nem", "porque"],
-                rationale: "A conjunção 'logo' indica conclusão decorrente do treino diário[cite: 6]."
+                rationale: "A conjunção 'logo' introduz a conclusão lógica de ter treinado todos os dias."
             },
             {
                 number: 11,
                 sentence: "Pedro é inteligente, [BLANK] precisa estudar mais.",
                 correct: "entretanto",
                 options: ["entretanto", "e", "ou", "portanto"],
-                rationale: "A conjunção 'entretanto' introduz uma oposição suave à inteligência (uma ressalva)[cite: 6]."
+                rationale: "A conjunção 'entretanto' apresenta uma ressalva ou oposição."
             },
             {
                 number: 12,
                 sentence: "Você deve escolher: [BLANK] faz a atividade agora, [BLANK] deixa para depois.",
                 correct: "ou / ou",
                 options: ["ou / ou", "e / e", "mas / mas", "nem / nem"],
-                rationale: "A estrutura correlativa 'ou... ou' expressa exclusividade ou escolha estrita[cite: 6]."
+                rationale: "O par 'ou... ou' indica alternância entre duas escolhas."
             },
             {
                 number: 13,
                 sentence: "O filme era longo, [BLANK] foi muito interessante.",
                 correct: "contudo",
                 options: ["contudo", "e", "porque", "logo"],
-                rationale: "A conjunção 'contudo' indica contraste entre a duração longa e o interesse despertado[cite: 6]."
+                rationale: "A conjunção 'contudo' indica oposição entre ser longo e mesmo assim ser interessante."
             },
             {
                 number: 14,
                 sentence: "Ela estava cansada, [BLANK] continuou ajudando os colegas.",
                 correct: "mas",
                 options: ["mas", "ou", "portanto", "pois"],
-                rationale: "A conjunção 'mas' contrasta o cansaço físico com a atitude persistente de ajuda[cite: 6]."
+                rationale: "A conjunção 'mas' destaca o contraste entre o cansaço e o ato de continuar ajudando."
             },
             {
                 number: 15,
                 sentence: "A turma se organizou bem, [BLANK] apresentou um ótimo trabalho.",
                 correct: "então",
                 options: ["então", "mas", "nem", "porque"],
-                rationale: "A conjunção 'então' introduz a conclusão ou consequência da boa organização[cite: 6]."
+                rationale: "A conjunção 'então' mostra a conclusão positiva da organização da turma."
             }
         ];
 
@@ -288,17 +684,52 @@
         let studentData = { name: "", grade: "Ensino Fundamental", turma: "Turma C" };
         let userAnswers = new Array(questions.length).fill(null);
 
-        let leaderboard = [
+        const defaultLeaderboard = [
             { name: "Ana Beatriz", score: 15, turma: "Turma C" },
             { name: "Lucas Gabriel", score: 14, turma: "Turma C" },
             { name: "Mariana Souza", score: 13, turma: "Turma C" },
             { name: "João Pedro", score: 12, turma: "Turma C" }
         ];
 
+        function getLeaderboard() {
+            try {
+                const saved = localStorage.getItem("ponte_conjuncoes_ranking");
+                return saved ? JSON.parse(saved) : [...defaultLeaderboard];
+            } catch (e) {
+                return [...defaultLeaderboard];
+            }
+        }
+
+        function saveToLeaderboard(entry) {
+            const list = getLeaderboard();
+            list.push(entry);
+            list.sort((a, b) => b.score - a.score);
+            try {
+                localStorage.setItem("ponte_conjuncoes_ranking", JSON.stringify(list.slice(0, 15)));
+            } catch (e) {}
+            return list;
+        }
+
+        function renderBridge() {
+            const container = document.getElementById("bridge-planks");
+            container.innerHTML = "";
+            for (let i = 0; i < questions.length; i++) {
+                const plank = document.createElement("div");
+                plank.className = "plank";
+                if (i < currentQuestionIndex) plank.classList.add("done");
+                else if (i === currentQuestionIndex) plank.classList.add("current");
+                container.appendChild(plank);
+            }
+            // Move characters across the bridge (from 6% to 82%)
+            const sprite = document.getElementById("characters-sprite");
+            const percent = 6 + (currentQuestionIndex / questions.length) * 74;
+            sprite.style.left = percent + "%";
+        }
+
         function startQuiz() {
             const nameInput = document.getElementById("student-name").value.trim();
             if (!nameInput) {
-                alert("Por favor, digite seu nome completo antes de começar!");
+                alert("Por favor, digite seu nome antes de começar!");
                 return;
             }
             studentData.name = nameInput;
@@ -311,22 +742,20 @@
 
         function loadQuestion() {
             const q = questions[currentQuestionIndex];
-            document.getElementById("question-counter").innerText = `Questão ${q.number} de ${questions.length}`;
+            document.getElementById("question-counter").innerText = `Passo ${q.number} de ${questions.length}`;
             document.getElementById("score-badge").innerText = `Pontos: ${score}`;
-            
-            document.getElementById("bridge-status-text").innerText = `👦👧 João e Maria atravessando... (Passo ${q.number}/${questions.length})`;
 
             const progressPercent = ((currentQuestionIndex) / questions.length) * 100;
             document.getElementById("progress-bar").style.width = `${Math.max(progressPercent, 7)}%`;
 
+            renderBridge();
+
             const qContainer = document.getElementById("question-container");
-            const formattedSentence = q.sentence.replace("[BLANK]", '<span class="px-3 py-1 mx-1 bg-cyan-100 text-cyan-800 rounded-lg border border-cyan-300 font-bold inline-block">_______</span>');
+            const formattedSentence = q.sentence.replace(/\[BLANK\]/g, '<span class="blank-slot">_______</span>');
 
             qContainer.innerHTML = `
-                <div class="p-5 bg-cyan-50/70 border border-cyan-100 rounded-2xl text-center mb-4">
-                    <span class="text-xs uppercase font-bold tracking-wider text-cyan-600 block mb-2">Ajude os colegas escolhendo a conjunção correta:</span>
-                    <h3 class="text-xl md:text-2xl font-semibold text-slate-800 leading-relaxed">${formattedSentence}</h3>
-                </div>
+                <span class="question-instruction">Escolha a conjunção correta para firmar a tábua da ponte:</span>
+                <div class="sentence-text">${formattedSentence}</div>
             `;
 
             const optionsContainer = document.getElementById("options-container");
@@ -334,10 +763,10 @@
 
             const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
 
-            shuffledOptions.forEach((opt, idx) => {
+            shuffledOptions.forEach((opt) => {
                 const btn = document.createElement("button");
-                btn.className = "w-full text-center p-4 rounded-xl border-2 border-slate-200 hover:border-cyan-500 hover:bg-cyan-50/50 transition font-bold text-slate-700 text-base shadow-sm";
-                btn.innerHTML = `${opt}`;
+                btn.className = "opt-btn";
+                btn.innerText = opt;
                 btn.onclick = () => selectOption(opt, btn, q.correct, q.rationale);
                 optionsContainer.appendChild(btn);
             });
@@ -350,40 +779,36 @@
             const buttons = document.getElementById("options-container").getElementsByTagName("button");
             for (let b of buttons) {
                 b.disabled = true;
-                b.classList.add("opacity-75", "cursor-not-allowed");
             }
 
             const isCorrect = (selectedOpt === correctOpt);
             userAnswers[currentQuestionIndex] = { text: selectedOpt, isCorrect: isCorrect, correctText: correctOpt, rationale: rationale };
-            
+
             const feedbackBox = document.getElementById("feedback-box");
             feedbackBox.classList.remove("hidden");
 
+            const sprite = document.getElementById("characters-sprite");
+
             if (isCorrect) {
-                selectedBtn.classList.remove("border-slate-200", "hover:border-cyan-500", "hover:bg-cyan-50/50");
-                selectedBtn.classList.add("border-green-500", "bg-green-50", "text-green-900");
-                feedbackBox.className = "p-4 rounded-xl mb-6 text-sm font-medium bg-green-100 text-green-800";
-                feedbackBox.innerHTML = `<strong>🌉 Passo firme na ponte! Acertou!</strong> ${rationale}`;
+                selectedBtn.classList.add("opt-correct");
+                feedbackBox.className = "feedback success";
+                feedbackBox.innerHTML = `<strong>🌉 Passo firme! Você acertou!</strong><br>${rationale}`;
                 score++;
-                
-                confetti({
-                    particleCount: 50,
-                    spread: 60,
-                    origin: { y: 0.7 }
-                });
+
+                sprite.classList.remove("hop");
+                void sprite.offsetWidth;
+                sprite.classList.add("hop");
+
+                fireConfetti(45);
             } else {
-                selectedBtn.classList.remove("border-slate-200", "hover:border-cyan-500", "hover:bg-cyan-50/50");
-                selectedBtn.classList.add("border-red-500", "bg-red-50", "text-red-900");
-                
+                selectedBtn.classList.add("opt-wrong");
                 for (let b of buttons) {
                     if (b.innerText.trim() === correctOpt) {
-                        b.classList.remove("border-slate-200");
-                        b.classList.add("border-green-500", "bg-green-50");
+                        b.classList.add("opt-correct");
                     }
                 }
-
-                feedbackBox.className = "p-4 rounded-xl mb-6 text-sm font-medium bg-red-100 text-red-800";
-                feedbackBox.innerHTML = `<strong>Atenção:</strong> A conjunção ideal era <strong>"${correctOpt}"</strong>. ${rationale}`;
+                feedbackBox.className = "feedback error";
+                feedbackBox.innerHTML = `<strong>⚠️ Quase! A tábua correta era "${correctOpt}".</strong><br>${rationale}`;
             }
 
             document.getElementById("score-badge").innerText = `Pontos: ${score}`;
@@ -405,40 +830,32 @@
             document.getElementById("result-student-info").innerText = `Estudante: ${studentData.name} • ${studentData.grade} (${studentData.turma})`;
             document.getElementById("final-score").innerText = `${score} / ${questions.length}`;
 
-            let msg = "Incrível! João e Maria atravessaram a ponte perfeitamente!";
-            if (score <= 8) msg = "Bom trabalho! Continue treinando as conjunções.";
-            else if (score <= 12) msg = "Muito bem! Excelente domínio das conjunções!";
+            let msg = "Incrível! João e Maria atravessaram a ponte com perfeição!";
+            if (score <= 8) msg = "Bom esforço! Continue praticando as conjunções.";
+            else if (score <= 12) msg = "Muito bem! Ótimo domínio das conjunções!";
             document.getElementById("final-message").innerText = msg;
 
-            leaderboard.push({ name: studentData.name, score: score, turma: studentData.turma });
-            leaderboard.sort((a, b) => b.score - a.score);
+            const updatedList = saveToLeaderboard({ name: studentData.name, score: score, turma: studentData.turma });
 
             const rankingList = document.getElementById("ranking-list");
             rankingList.innerHTML = "";
-            leaderboard.slice(0, 5).forEach((item, index) => {
+            updatedList.slice(0, 6).forEach((item, index) => {
                 const row = document.createElement("div");
-                row.className = `flex items-center justify-between p-2.5 rounded-xl text-xs font-medium ${item.name === studentData.name ? 'bg-cyan-100 text-cyan-900 border border-cyan-200' : 'bg-white text-slate-700 border border-slate-100'}`;
-                
+                row.className = "ranking-row" + (item.name === studentData.name && item.score === score ? " highlight" : "");
+
                 let medal = `#${index + 1}`;
                 if (index === 0) medal = "🥇";
                 else if (index === 1) medal = "🥈";
                 else if (index === 2) medal = "🥉";
 
                 row.innerHTML = `
-                    <div class="flex items-center gap-2">
-                        <span class="font-bold text-sm w-6 text-center">${medal}</span>
-                        <span>${item.name} <span class="text-slate-400 text-[10px]">(${item.turma})</span></span>
-                    </div>
-                    <span class="font-bold bg-cyan-50 text-cyan-700 px-2.5 py-1 rounded-lg">${item.score} pts</span>
+                    <span>${medal} ${item.name} <small style="color:#64748b;">(${item.turma})</small></span>
+                    <span style="color:#0369a1; font-weight:800;">${item.score} pts</span>
                 `;
                 rankingList.appendChild(row);
             });
 
-            confetti({
-                particleCount: 120,
-                spread: 100,
-                origin: { y: 0.5 }
-            });
+            fireConfetti(110);
         }
 
         function restartQuiz() {
@@ -460,15 +877,20 @@
             questions.forEach((q, idx) => {
                 const userAns = userAnswers[idx];
                 const isCorrect = userAns ? userAns.isCorrect : false;
-                
+
                 const div = document.createElement("div");
-                div.className = `p-4 rounded-xl border ${isCorrect ? 'border-green-200 bg-green-50/50' : 'border-red-200 bg-red-50/50'}`;
-                
+                div.className = "review-item " + (isCorrect ? "ok" : "fail");
+
+                const filled = q.sentence.replace(/\[BLANK\]/g, `<strong>[${userAns ? userAns.text : '---'}]</strong>`);
+
                 div.innerHTML = `
-                    <p class="text-xs font-bold text-cyan-700 mb-1">Frase ${q.number}</p>
-                    <p class="font-semibold text-slate-800 mb-2">${q.sentence.replace('[BLANK]', '<strong>(' + (userAns ? userAns.text : 'Não respondida') + ')</strong>')}</p>
-                    <p class="text-sm mb-1"><strong class="text-slate-600">Sua resposta:</strong> <span class="${isCorrect ? 'text-green-700 font-semibold' : 'text-red-700 font-semibold'}">${userAns ? userAns.text : 'Não respondida'}</span> ${!isCorrect ? '(Correta: ' + q.correct + ')' : ''}</p>
-                    <p class="text-xs text-slate-600 italic">Explicação: ${q.rationale}</p>
+                    <div style="font-size:0.78rem; font-weight:700; color:#0284c7; margin-bottom:4px;">Frase ${q.number}</div>
+                    <div style="font-weight:700; margin-bottom:6px;">${filled}</div>
+                    <div style="font-size:0.88rem; margin-bottom:4px;">
+                        Sua resposta: <strong style="color:${isCorrect ? '#15803d' : '#b91c1c'};">${userAns ? userAns.text : 'Não respondida'}</strong>
+                        ${!isCorrect ? ` | Correta: <strong>${q.correct}</strong>` : ' ✔️'}
+                    </div>
+                    <div style="font-size:0.82rem; color:#475569; font-style:italic;">${q.rationale}</div>
                 `;
                 reviewList.appendChild(div);
             });
@@ -477,6 +899,63 @@
         function backToResult() {
             document.getElementById("review-screen").classList.add("hidden");
             document.getElementById("result-screen").classList.remove("hidden");
+        }
+
+        // Offline Native Confetti Engine (zero external scripts needed)
+        const canvas = document.getElementById("confetti-canvas");
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        function fireConfetti(count) {
+            const colors = ["#0284c7", "#10b981", "#f59e0b", "#ec4899", "#8b5cf6", "#ef4444"];
+            for (let i = 0; i < count; i++) {
+                particles.push({
+                    x: window.innerWidth / 2 + (Math.random() - 0.5) * 180,
+                    y: window.innerHeight * 0.65,
+                    vx: (Math.random() - 0.5) * 14,
+                    vy: -Math.random() * 14 - 5,
+                    size: Math.random() * 8 + 5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    rotation: Math.random() * 360,
+                    vr: (Math.random() - 0.5) * 10,
+                    alpha: 1
+                });
+            }
+            if (particles.length === count) {
+                requestAnimationFrame(updateConfetti);
+            }
+        }
+
+        function updateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p) => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.38; // gravity
+                p.rotation += p.vr;
+                p.alpha -= 0.012;
+
+                ctx.save();
+                ctx.globalAlpha = Math.max(p.alpha, 0);
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.fillStyle = p.color;
+                ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                ctx.restore();
+            });
+            particles = particles.filter((p) => p.alpha > 0 && p.y < canvas.height + 20);
+            if (particles.length > 0) {
+                requestAnimationFrame(updateConfetti);
+            } else {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
         }
     </script>
 </body>
