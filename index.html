@@ -30,7 +30,7 @@
     <header class="bg-cyan-600 text-white shadow-md py-6 px-4">
         <div class="max-w-3xl mx-auto text-center">
             <h1 class="font-fun text-3xl md:text-4xl tracking-wide mb-1">🌉 A Ponte das Conjunções</h1>
-            <p class="text-cyan-100 text-sm md:text-base">EEIEF Antônio Albuquerque Sousa Filho • Atividade Interativa</p>
+            <p class="text-cyan-100 text-sm md:text-base">EEIEF Antônio Albuquerque Sousa Filho • Desafio dos Colegas na Ponte</p>
         </div>
     </header>
 
@@ -44,8 +44,8 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
             </div>
-            <h2 class="font-fun text-2xl text-cyan-900 mb-3">Atravesse a Ponte das Conjunções!</h2>
-            <p class="text-slate-600 mb-6 max-w-lg mx-auto">Escolha a conjunção correta para ligar as ideias e atravessar o lago com segurança. Preencha seus dados para começar:</p>
+            <h2 class="font-fun text-2xl text-cyan-900 mb-3">Ajude os Colegas a Atravessar a Ponte!</h2>
+            <p class="text-slate-600 mb-6 max-w-lg mx-auto">O João e a Maria precisam cruzar o lago das conjunções, mas só conseguem dar passos seguros quando você escolhe a ponte certa (a conjunção correta). Vamos ajudá-los?</p>
             
             <div class="max-w-sm mx-auto space-y-4 mb-8 text-left bg-cyan-50 p-6 rounded-2xl">
                 <div>
@@ -70,19 +70,26 @@
             </div>
 
             <button onclick="startQuiz()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 text-base">
-                Começar Atividade 🌉
+                Começar Aventura 👦👧🌉
             </button>
         </div>
 
         <!-- Quiz Screen -->
         <div id="quiz-screen" class="hidden bg-white rounded-2xl shadow-xl p-6 md:p-8">
-            <!-- Progress Bar & Info -->
+            <!-- Progress Bar & Bridge Visual -->
             <div class="mb-6 border-b pb-4">
                 <div class="flex justify-between items-center mb-2">
                     <span id="question-counter" class="text-sm font-bold text-cyan-700 uppercase tracking-wider">Questão 1 de 15</span>
                     <span id="score-badge" class="text-xs bg-cyan-100 text-cyan-800 font-semibold px-3 py-1 rounded-full">Pontos: 0</span>
                 </div>
-                <!-- Visual Progress Bar -->
+                
+                <!-- Visual Bridge Progress simulation -->
+                <div class="flex justify-between items-center bg-cyan-50 px-4 py-2 rounded-xl mb-3 text-xs font-semibold text-cyan-800 border border-cyan-100">
+                    <span>🌲 Margem Inicial</span>
+                    <span id="bridge-status-text" class="text-cyan-700">👦👧 Caminhando na ponte... (Passo 1/15)</span>
+                    <span>🌳 Outro Lado</span>
+                </div>
+
                 <div class="w-full bg-slate-100 h-3 rounded-full overflow-hidden">
                     <div id="progress-bar" class="bg-cyan-600 h-full transition-all duration-300 rounded-full" style="width: 7%;"></div>
                 </div>
@@ -104,7 +111,7 @@
             <!-- Navigation Button -->
             <div class="flex justify-end">
                 <button id="next-btn" onclick="nextQuestion()" class="hidden bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow transition">
-                    Próxima Ponte ➡️
+                    Próximo Passo na Ponte ➡️
                 </button>
             </div>
         </div>
@@ -116,20 +123,21 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             </div>
-            <h2 class="font-fun text-3xl text-cyan-900 mb-1">Travessia Concluída!</h2>
+            <h2 class="font-fun text-3xl text-cyan-900 mb-1">🎉 Travessia Concluída com Sucesso!</h2>
+            <p class="text-slate-600 text-sm mb-2">O João e a Maria cruzaram a ponte sãos e salvos graças a você!</p>
             <p id="result-student-info" class="text-slate-600 font-medium mb-4 text-sm"></p>
             
             <div class="bg-cyan-50 p-5 rounded-2xl max-w-xs mx-auto mb-6">
                 <span class="block text-xs uppercase tracking-wider text-cyan-700 font-bold mb-1">Sua Pontuação</span>
                 <span id="final-score" class="text-4xl font-extrabold text-cyan-900">0 / 15</span>
-                <p id="final-message" class="text-slate-600 text-xs mt-1">Excelente desempenho na ponte!</p>
+                <p id="final-message" class="text-slate-600 text-xs mt-1">Excelente desempenho!</p>
             </div>
 
             <!-- Ranking / Leaderboard Section -->
             <div class="mb-8 text-left bg-slate-50 border border-slate-200 rounded-2xl p-5">
                 <div class="flex items-center justify-between mb-3">
                     <h3 class="font-fun text-lg text-cyan-900 flex items-center gap-2">
-                        🏆 Ranking da Turma
+                        🏆 Ranking dos Exploradores
                     </h3>
                     <span class="text-xs text-slate-500">Atualizado ao vivo</span>
                 </div>
@@ -140,7 +148,7 @@
 
             <div class="flex flex-wrap justify-center gap-3">
                 <button onclick="restartQuiz()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow transition text-sm">
-                    Refazer Atividade
+                    Refazer Aventura
                 </button>
                 <button onclick="reviewAnswers()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 font-semibold px-6 py-2.5 rounded-xl transition text-sm">
                     Revisar Frases
@@ -150,7 +158,7 @@
 
         <!-- Review Screen -->
         <div id="review-screen" class="hidden bg-white rounded-2xl shadow-xl p-6 md:p-8">
-            <h2 class="font-fun text-2xl text-cyan-900 mb-6 text-center">Revisão das Frases</h2>
+            <h2 class="font-fun text-2xl text-cyan-900 mb-6 text-center">Revisão da Jornada</h2>
             <div id="review-list" class="space-y-6 mb-6"></div>
             <div class="text-center">
                 <button onclick="backToResult()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold px-6 py-2.5 rounded-xl shadow transition">
@@ -173,105 +181,105 @@
                 sentence: "Estudei bastante, [BLANK] consegui tirar uma boa nota.",
                 correct: "por isso",
                 options: ["por isso", "mas", "e", "ou"],
-                rationale: "A conjunção 'por isso' expressa a conclusão ou consequência lógica de ter estudado bastante."
+                rationale: "A conjunção 'por isso' expressa a conclusão ou consequência lógica de ter estudado bastante[cite: 6]."
             },
             {
                 number: 2,
                 sentence: "João queria brincar, [BLANK] precisava terminar a tarefa.",
                 correct: "mas",
                 options: ["mas", "portanto", "ou", "e"],
-                rationale: "A conjunção 'mas' indica oposição ou contraste entre querer brincar e a necessidade de terminar a tarefa."
+                rationale: "A conjunção 'mas' indica oposição ou contraste entre querer brincar e a necessidade de terminar a tarefa[cite: 6]."
             },
             {
                 number: 3,
                 sentence: "Você prefere suco [BLANK] refrigerante?",
                 correct: "ou",
                 options: ["ou", "e", "pois", "logo"],
-                rationale: "A conjunção 'ou' indica uma ideia de alternância ou escolha entre duas opções."
+                rationale: "A conjunção 'ou' indica uma ideia de alternância ou escolha entre duas opções[cite: 6]."
             },
             {
                 number: 4,
                 sentence: "Maria não foi à escola, [BLANK] estava doente.",
                 correct: "porque",
                 options: ["porque", "mas", "então", "nem"],
-                rationale: "A conjunção 'porque' introduz a justificativa ou causa de Maria não ter ido à escola."
+                rationale: "A conjunção 'porque' introduz a justificativa ou causa de Maria não ter ido à escola[cite: 6]."
             },
             {
                 number: 5,
                 sentence: "O aluno leu o texto [BLANK] respondeu às questões.",
                 correct: "e",
                 options: ["e", "mas", "ou", "porém"],
-                rationale: "A conjunção 'e' liga duas ações que se somam em sequência."
+                rationale: "A conjunção 'e' liga duas ações que se somam em sequência[cite: 6]."
             },
             {
                 number: 6,
                 sentence: "Não gosto de mentira, [BLANK] de injustiça.",
                 correct: "nem",
                 options: ["nem", "e", "mas", "portanto"],
-                rationale: "A conjunção 'nem' soma ideias negativas (e não gosto de...)."
+                rationale: "A conjunção 'nem' soma ideias negativas[cite: 6]."
             },
             {
                 number: 7,
                 sentence: "Choveu muito, [BLANK] o jogo foi cancelado.",
                 correct: "portanto",
                 options: ["portanto", "mas", "porque", "ou"],
-                rationale: "A conjunção 'portanto' expressa a consequência direta da chuva intensa."
+                rationale: "A conjunção 'portanto' expressa a consequência direta da chuva intensa[cite: 6]."
             },
             {
                 number: 8,
                 sentence: "Ana queria sair, [BLANK] sua mãe não deixou.",
                 correct: "porém",
                 options: ["porém", "e", "logo", "pois"],
-                rationale: "A conjunção 'porém' estabelece oposição entre a vontade de sair e a recusa da mãe."
+                rationale: "A conjunção 'porém' estabelece oposição entre a vontade de sair e a recusa da mãe[cite: 6]."
             },
             {
                 number: 9,
                 sentence: "Preste atenção, [BLANK] a explicação é importante.",
                 correct: "pois",
                 options: ["pois", "mas", "ou", "então"],
-                rationale: "A conjunção 'pois' justifica o motivo de se prestar atenção."
+                rationale: "A conjunção 'pois' justifica o motivo de se prestar atenção[cite: 6]."
             },
             {
                 number: 10,
                 sentence: "Ele treinou todos os dias, [BLANK] venceu a competição.",
                 correct: "logo",
                 options: ["logo", "mas", "nem", "porque"],
-                rationale: "A conjunção 'logo' indica conclusão decorrente do treino diário."
+                rationale: "A conjunção 'logo' indica conclusão decorrente do treino diário[cite: 6]."
             },
             {
                 number: 11,
                 sentence: "Pedro é inteligente, [BLANK] precisa estudar mais.",
                 correct: "entretanto",
                 options: ["entretanto", "e", "ou", "portanto"],
-                rationale: "A conjunção 'entretanto' introduz uma oposição suave à inteligência (uma ressalva)."
+                rationale: "A conjunção 'entretanto' introduz uma oposição suave à inteligência (uma ressalva)[cite: 6]."
             },
             {
                 number: 12,
                 sentence: "Você deve escolher: [BLANK] faz a atividade agora, [BLANK] deixa para depois.",
                 correct: "ou / ou",
                 options: ["ou / ou", "e / e", "mas / mas", "nem / nem"],
-                rationale: "A estrutura correlativa 'ou... ou' expressa exclusividade ou escolha estrita."
+                rationale: "A estrutura correlativa 'ou... ou' expressa exclusividade ou escolha estrita[cite: 6]."
             },
             {
                 number: 13,
                 sentence: "O filme era longo, [BLANK] foi muito interessante.",
                 correct: "contudo",
                 options: ["contudo", "e", "porque", "logo"],
-                rationale: "A conjunção 'contudo' indica contraste entre a duração longa e o interesse despertado."
+                rationale: "A conjunção 'contudo' indica contraste entre a duração longa e o interesse despertado[cite: 6]."
             },
             {
                 number: 14,
                 sentence: "Ela estava cansada, [BLANK] continuou ajudando os colegas.",
                 correct: "mas",
                 options: ["mas", "ou", "portanto", "pois"],
-                rationale: "A conjunção 'mas' contrasta o cansaço físico com a atitude persistente de ajuda."
+                rationale: "A conjunção 'mas' contrasta o cansaço físico com a atitude persistente de ajuda[cite: 6]."
             },
             {
                 number: 15,
                 sentence: "A turma se organizou bem, [BLANK] apresentou um ótimo trabalho.",
                 correct: "então",
                 options: ["então", "mas", "nem", "porque"],
-                rationale: "A conjunção 'então' introduz a conclusão ou consequência da boa organização."
+                rationale: "A conjunção 'então' introduz a conclusão ou consequência da boa organização[cite: 6]."
             }
         ];
 
@@ -306,6 +314,8 @@
             document.getElementById("question-counter").innerText = `Questão ${q.number} de ${questions.length}`;
             document.getElementById("score-badge").innerText = `Pontos: ${score}`;
             
+            document.getElementById("bridge-status-text").innerText = `👦👧 João e Maria atravessando... (Passo ${q.number}/${questions.length})`;
+
             const progressPercent = ((currentQuestionIndex) / questions.length) * 100;
             document.getElementById("progress-bar").style.width = `${Math.max(progressPercent, 7)}%`;
 
@@ -314,7 +324,7 @@
 
             qContainer.innerHTML = `
                 <div class="p-5 bg-cyan-50/70 border border-cyan-100 rounded-2xl text-center mb-4">
-                    <span class="text-xs uppercase font-bold tracking-wider text-cyan-600 block mb-2">Complete a frase com a conjunção correta:</span>
+                    <span class="text-xs uppercase font-bold tracking-wider text-cyan-600 block mb-2">Ajude os colegas escolhendo a conjunção correta:</span>
                     <h3 class="text-xl md:text-2xl font-semibold text-slate-800 leading-relaxed">${formattedSentence}</h3>
                 </div>
             `;
@@ -353,7 +363,7 @@
                 selectedBtn.classList.remove("border-slate-200", "hover:border-cyan-500", "hover:bg-cyan-50/50");
                 selectedBtn.classList.add("border-green-500", "bg-green-50", "text-green-900");
                 feedbackBox.className = "p-4 rounded-xl mb-6 text-sm font-medium bg-green-100 text-green-800";
-                feedbackBox.innerHTML = `<strong>🌉 Travessia segura! Acertou!</strong> ${rationale}`;
+                feedbackBox.innerHTML = `<strong>🌉 Passo firme na ponte! Acertou!</strong> ${rationale}`;
                 score++;
                 
                 confetti({
@@ -373,7 +383,7 @@
                 }
 
                 feedbackBox.className = "p-4 rounded-xl mb-6 text-sm font-medium bg-red-100 text-red-800";
-                feedbackBox.innerHTML = `<strong>Atenção:</strong> A conjunção correta era <strong>"${correctOpt}"</strong>. ${rationale}`;
+                feedbackBox.innerHTML = `<strong>Atenção:</strong> A conjunção ideal era <strong>"${correctOpt}"</strong>. ${rationale}`;
             }
 
             document.getElementById("score-badge").innerText = `Pontos: ${score}`;
@@ -395,8 +405,8 @@
             document.getElementById("result-student-info").innerText = `Estudante: ${studentData.name} • ${studentData.grade} (${studentData.turma})`;
             document.getElementById("final-score").innerText = `${score} / ${questions.length}`;
 
-            let msg = "Excelente! Você cruzou todas as pontes perfeitamente!";
-            if (score <= 8) msg = "Bom trabalho! Continue praticando as conjunções.";
+            let msg = "Incrível! João e Maria atravessaram a ponte perfeitamente!";
+            if (score <= 8) msg = "Bom trabalho! Continue treinando as conjunções.";
             else if (score <= 12) msg = "Muito bem! Excelente domínio das conjunções!";
             document.getElementById("final-message").innerText = msg;
 
