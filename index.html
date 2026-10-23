@@ -22,22 +22,52 @@
         header {
             background: linear-gradient(90deg, #0284c7, #0369a1);
             color: white;
-            padding: 20px 16px;
-            text-align: center;
+            padding: 16px 20px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
         }
-        header h1 {
-            font-size: 1.9rem;
+        .header-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+        .header-title h1 {
+            font-size: 1.65rem;
             font-weight: 800;
-            margin-bottom: 4px;
             letter-spacing: 0.5px;
         }
-        header p {
+        .header-title p {
             color: #e0f2fe;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
+        }
+        .nav-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.18);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 8px 14px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.32);
+            transform: translateY(-1px);
         }
         main {
-            max-width: 780px;
+            max-width: 860px;
             width: 100%;
             margin: 24px auto;
             padding: 0 16px;
@@ -60,8 +90,8 @@
         .scene-container {
             position: relative;
             width: 100%;
-            height: 150px;
-            background: linear-gradient(180deg, #bae6fd 0%, #7dd3fc 65%, #0284c7 65%, #0369a1 100%);
+            height: 185px;
+            background: linear-gradient(180deg, #bae6fd 0%, #7dd3fc 68%, #0284c7 68%, #0369a1 100%);
             border-radius: 16px;
             margin-bottom: 20px;
             overflow: hidden;
@@ -74,19 +104,19 @@
             border-radius: 50px;
             height: 22px;
             width: 65px;
-            top: 15px;
+            top: 14px;
         }
         .cloud-1 { left: 12%; animation: floatCloud 18s infinite alternate ease-in-out; }
-        .cloud-2 { right: 18%; top: 25px; width: 80px; animation: floatCloud 22s infinite alternate-reverse ease-in-out; }
+        .cloud-2 { right: 18%; top: 24px; width: 80px; animation: floatCloud 22s infinite alternate-reverse ease-in-out; }
         @keyframes floatCloud {
             from { transform: translateX(-15px); }
             to { transform: translateX(15px); }
         }
         .bank {
             position: absolute;
-            bottom: 25%;
-            width: 14%;
-            height: 36px;
+            bottom: 22%;
+            width: 12%;
+            height: 38px;
             background: #16a34a;
             border-top: 6px solid #4ade80;
             z-index: 2;
@@ -95,30 +125,30 @@
         .bank-right { right: 0; border-radius: 12px 0 0 0; }
         .tree {
             position: absolute;
-            bottom: 48%;
-            font-size: 2.2rem;
+            bottom: 43%;
+            font-size: 2.3rem;
             z-index: 3;
             line-height: 1;
         }
-        .tree-left { left: 2%; }
-        .tree-right { right: 2%; }
+        .tree-left { left: 1%; }
+        .tree-right { right: 1%; }
         .bridge-structure {
             position: absolute;
-            bottom: 34%;
-            left: 13%;
-            width: 74%;
+            bottom: 30%;
+            left: 11%;
+            width: 78%;
             height: 18px;
             display: flex;
-            gap: 3px;
+            gap: 2px;
             z-index: 2;
             align-items: center;
         }
         .bridge-rail {
             position: absolute;
-            bottom: 45%;
-            left: 13%;
-            width: 74%;
-            height: 16px;
+            bottom: 40%;
+            left: 11%;
+            width: 78%;
+            height: 18px;
             border-top: 3px dashed #92400e;
             border-left: 4px solid #78350f;
             border-right: 4px solid #78350f;
@@ -128,7 +158,7 @@
             flex: 1;
             height: 12px;
             background: #cbd5e1;
-            border-radius: 3px;
+            border-radius: 2px;
             border: 1px solid #94a3b8;
             transition: all 0.35s ease;
         }
@@ -140,24 +170,31 @@
         .plank.current {
             background: #fbbf24;
             border-color: #d97706;
-            transform: scaleY(1.25);
+            transform: scaleY(1.3);
         }
+        /* Full-body SVG Characters */
         .characters {
             position: absolute;
-            bottom: 44%;
+            bottom: 35%;
             left: 4%;
-            font-size: 1.85rem;
             z-index: 4;
-            transition: left 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            filter: drop-shadow(0 3px 3px rgba(0,0,0,0.25));
-            white-space: nowrap;
+            transition: left 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 4px 4px rgba(0,0,0,0.22));
+            display: flex;
+            align-items: flex-end;
+            pointer-events: none;
+        }
+        .characters svg {
+            width: 68px;
+            height: 64px;
+            overflow: visible;
         }
         .characters.hop {
-            animation: charHop 0.45s ease;
+            animation: charHop 0.5s ease;
         }
         @keyframes charHop {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-16px) scale(1.08); }
+            50% { transform: translateY(-18px) scale(1.06); }
         }
         .water-waves {
             position: absolute;
@@ -169,38 +206,58 @@
             letter-spacing: 6px;
             user-select: none;
         }
-        /* Forms & Inputs */
-        .form-box {
-            max-width: 420px;
-            margin: 20px auto 24px;
-            background: #f0f9ff;
-            padding: 20px;
-            border-radius: 16px;
-            border: 1px solid #bae6fd;
+        /* Forms & Setup */
+        .setup-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+            margin: 20px 0 24px;
             text-align: left;
         }
+        @media (max-width: 680px) {
+            .setup-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .setup-panel {
+            background: #f0f9ff;
+            padding: 18px;
+            border-radius: 16px;
+            border: 1px solid #bae6fd;
+        }
+        .panel-title {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #0c4a6e;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border-bottom: 1px solid #bae6fd;
+            padding-bottom: 6px;
+        }
         .form-group {
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
         label {
             display: block;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: #0369a1;
             text-transform: uppercase;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
         input, select {
             width: 100%;
-            padding: 11px 14px;
+            padding: 10px 12px;
             border: 2px solid #bae6fd;
-            border-radius: 12px;
-            font-size: 0.95rem;
+            border-radius: 10px;
+            font-size: 0.92rem;
             background: white;
             color: #1e293b;
             outline: none;
@@ -209,21 +266,97 @@
         input:focus, select:focus {
             border-color: #0284c7;
         }
-        input[readonly] {
-            background: #f1f5f9;
-            color: #64748b;
-            cursor: not-allowed;
+        /* Swatches for Avatar Customization */
+        .customizer-row {
+            margin-bottom: 12px;
+        }
+        .swatch-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .swatch-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 10px;
+            border: 2px solid #cbd5e1;
+            background: white;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #334155;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .swatch-btn:hover {
+            border-color: #0284c7;
+        }
+        .swatch-btn.active {
+            border-color: #0284c7;
+            background: #e0f2fe;
+            color: #0c4a6e;
+            box-shadow: 0 2px 6px rgba(2,132,199,0.2);
+        }
+        .color-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: inline-block;
+            border: 1px solid rgba(0,0,0,0.15);
+        }
+        /* Game Mode Cards */
+        .modes-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 6px;
+        }
+        .mode-card {
+            border: 2px solid #cbd5e1;
+            background: white;
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+        .mode-card:hover {
+            border-color: #38bdf8;
+        }
+        .mode-card.active {
+            border-color: #0284c7;
+            background: #e0f2fe;
+            box-shadow: 0 4px 10px rgba(2, 132, 199, 0.15);
+        }
+        .mode-card .mode-icon {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+            display: block;
+        }
+        .mode-card .mode-name {
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #0c4a6e;
+            display: block;
+        }
+        .mode-card .mode-desc {
+            font-size: 0.74rem;
+            color: #475569;
+            margin-top: 3px;
+            display: block;
+            line-height: 1.3;
         }
         /* Buttons */
         .btn {
             background: #0284c7;
             color: white;
             font-weight: 700;
-            padding: 14px 28px;
+            padding: 13px 26px;
             border-radius: 14px;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 0.98rem;
             box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);
             transition: all 0.2s;
         }
@@ -239,12 +372,24 @@
         .btn-secondary:hover {
             background: #cbd5e1;
         }
-        /* Progress Header */
+        .btn-danger {
+            background: #fee2e2;
+            color: #b91c1c;
+            box-shadow: none;
+            padding: 8px 14px;
+            font-size: 0.8rem;
+        }
+        .btn-danger:hover {
+            background: #fecaca;
+        }
+        /* Top Quiz Bar & Timer */
         .top-bar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         .badge {
             background: #e0f2fe;
@@ -253,6 +398,51 @@
             font-size: 0.85rem;
             padding: 6px 14px;
             border-radius: 999px;
+        }
+        .badge-mode {
+            background: #fef3c7;
+            color: #92400e;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 5px 12px;
+            border-radius: 999px;
+            border: 1px solid #fde68a;
+        }
+        .timer-box {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #fff1f2;
+            border: 2px solid #fecdd3;
+            color: #be123c;
+            padding: 5px 14px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 0.9rem;
+        }
+        .timer-box.urgent {
+            background: #fee2e2;
+            border-color: #ef4444;
+            color: #dc2626;
+            animation: pulseUrgent 0.6s infinite alternate;
+        }
+        @keyframes pulseUrgent {
+            from { transform: scale(1); }
+            to { transform: scale(1.06); }
+        }
+        .timer-bar-wrap {
+            width: 100%;
+            height: 8px;
+            background: #ffe4e6;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 12px;
+        }
+        .timer-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #f59e0b, #ef4444);
+            width: 100%;
+            transition: width 1s linear;
         }
         .progress-track {
             width: 100%;
@@ -266,7 +456,7 @@
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #0284c7, #10b981);
-            width: 7%;
+            width: 4%;
             transition: width 0.35s ease;
             border-radius: 999px;
         }
@@ -313,6 +503,10 @@
         @media (max-width: 520px) {
             .options-grid {
                 grid-template-columns: 1fr;
+            }
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
             }
         }
         .opt-btn {
@@ -368,11 +562,11 @@
             border: 2px solid #bae6fd;
             padding: 20px;
             border-radius: 18px;
-            max-width: 280px;
+            max-width: 320px;
             margin: 16px auto 24px;
         }
         .score-number {
-            font-size: 2.6rem;
+            font-size: 2.5rem;
             font-weight: 800;
             color: #0369a1;
             display: block;
@@ -384,7 +578,8 @@
             border-radius: 16px;
             padding: 18px;
             text-align: left;
-            margin-bottom: 24px;
+            margin-top: 20px;
+            margin-bottom: 20px;
         }
         .ranking-row {
             display: flex;
@@ -395,8 +590,10 @@
             margin-bottom: 8px;
             background: white;
             border: 1px solid #f1f5f9;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             font-weight: 600;
+            flex-wrap: wrap;
+            gap: 6px;
         }
         .ranking-row.highlight {
             background: #e0f2fe;
@@ -440,8 +637,20 @@
     <canvas id="confetti-canvas"></canvas>
 
     <header>
-        <h1>🌉 A Ponte das Conjunções</h1>
-        <p>EEIEF Antônio Albuquerque Sousa Filho • Desafio Interativo</p>
+        <div class="header-inner">
+            <div class="header-title">
+                <h1>🌉 A Ponte das Conjunções</h1>
+                <p>Desafio Interativo de Língua Portuguesa • 1º ao 5º Ano</p>
+            </div>
+            <div class="nav-actions">
+                <button class="nav-btn" onclick="goHome()" title="Voltar para a Página Inicial / Recomeçar">
+                    🏠 Início / Recomeçar
+                </button>
+                <button class="nav-btn" onclick="openRankingModal()" title="Ver Ranking da Turma">
+                    🏆 Ranking da Turma
+                </button>
+            </div>
+        </div>
     </header>
 
     <main>
@@ -458,47 +667,146 @@
                     <div class="plank current"></div><div class="plank"></div><div class="plank"></div>
                     <div class="plank"></div><div class="plank"></div><div class="plank"></div>
                 </div>
-                <div class="characters" style="left: 18%;">👦👧</div>
+                <div id="welcome-avatars" class="characters" style="left: 20%;"></div>
                 <div class="bank bank-right"></div>
                 <div class="tree tree-right">🌳</div>
                 <div class="water-waves">≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈</div>
             </div>
 
-            <h2 style="font-size: 1.6rem; color: #0c4a6e; margin-bottom: 8px;">Ajude o João e a Maria a Atravessarem!</h2>
-            <p style="color: #475569; max-width: 540px; margin: 0 auto; font-size: 0.95rem; line-height: 1.5;">
-                Cada conjunção funciona como uma tábua firme na ponte que liga uma ideia à outra. Escolha a conjunção correta em cada frase para que os dois colegas atravessem o lago em segurança!
+            <h2 style="font-size: 1.55rem; color: #0c4a6e; margin-bottom: 6px;">Personalize seus Colegas e Escolha o Modo!</h2>
+            <p style="color: #475569; max-width: 620px; margin: 0 auto; font-size: 0.92rem; line-height: 1.45;">
+                Cada conjunção é uma tábua firme na ponte que conecta as ideias. Vista o João e a Maria, escolha entre o <strong>Modo Reflexão</strong> ou o <strong>Modo Desafio</strong> e ajude-os a atravessar as 25 tábuas do lago!
             </p>
 
-            <div class="form-box">
-                <div class="form-group">
-                    <label>Nome Completo do Estudante</label>
-                    <input type="text" id="student-name" placeholder="Ex: Ana Clara Souza">
-                </div>
-                <div class="form-row">
-                    <div>
-                        <label>Série</label>
-                        <input type="text" id="student-grade" value="Ensino Fundamental" readonly>
+            <div class="setup-grid">
+                <!-- Left Column: Student Info & Game Mode -->
+                <div class="setup-panel">
+                    <div class="panel-title">🎓 1. Identificação e Modo de Jogo</div>
+                    <div class="form-group">
+                        <label>Nome ou Apelido (Nickname)</label>
+                        <input type="text" id="student-name" placeholder="Digite seu nome completo">
                     </div>
-                    <div>
-                        <label>Turma</label>
-                        <select id="student-class">
-                            <option value="Turma A">Turma A</option>
-                            <option value="Turma B">Turma B</option>
-                            <option value="Turma C" selected>Turma C</option>
-                            <option value="Turma D">Turma D</option>
-                        </select>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Série (Ens. Fundamental)</label>
+                            <select id="student-grade">
+                                <option value="1º Ano">1º Ano</option>
+                                <option value="2º Ano">2º Ano</option>
+                                <option value="3º Ano">3º Ano</option>
+                                <option value="4º Ano">4º Ano</option>
+                                <option value="5º Ano" selected>5º Ano</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Turma</label>
+                            <select id="student-class">
+                                <option value="Turma A">Turma A</option>
+                                <option value="Turma B">Turma B</option>
+                                <option value="Turma C" selected>Turma C</option>
+                                <option value="Turma D">Turma D</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label style="margin-top: 4px;">Escolha o Modo de Jogo</label>
+                    <div class="modes-container">
+                        <div id="mode-reflexao" class="mode-card active" onclick="selectGameMode('reflexao')">
+                            <span class="mode-icon">🧘‍♂️</span>
+                            <span class="mode-name">Modo Reflexão</span>
+                            <span class="mode-desc">Sem limite de tempo. Analise cada frase com calma! (10 pts/acerto)</span>
+                        </div>
+                        <div id="mode-desafio" class="mode-card" onclick="selectGameMode('desafio')">
+                            <span class="mode-icon">⚡⏱️</span>
+                            <span class="mode-name">Modo Desafio</span>
+                            <span class="mode-desc">Contra o relógio! 15 segundos por frase + Bônus de Velocidade!</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Avatar Outfit Customizer -->
+                <div class="setup-panel">
+                    <div class="panel-title">👕 2. Roupas do João e da Maria</div>
+
+                    <div class="customizer-row">
+                        <label>Roupa do João (Camiseta e Calça)</label>
+                        <div class="swatch-group" id="boy-outfit-swatches">
+                            <button type="button" class="swatch-btn active" onclick="setBoyOutfit('azul', this)">
+                                <span class="color-dot" style="background:#2563eb;"></span> Azul Clássico
+                            </button>
+                            <button type="button" class="swatch-btn" onclick="setBoyOutfit('verde', this)">
+                                <span class="color-dot" style="background:#16a34a;"></span> Verde Floresta
+                            </button>
+                            <button type="button" class="swatch-btn" onclick="setBoyOutfit('vermelho', this)">
+                                <span class="color-dot" style="background:#dc2626;"></span> Vermelho Esporte
+                            </button>
+                            <button type="button" class="swatch-btn" onclick="setBoyOutfit('laranja', this)">
+                                <span class="color-dot" style="background:#ea580c;"></span> Laranja Solar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="customizer-row">
+                        <label>Vestido da Maria</label>
+                        <div class="swatch-group" id="girl-outfit-swatches">
+                            <button type="button" class="swatch-btn active" onclick="setGirlOutfit('rosa', this)">
+                                <span class="color-dot" style="background:#ec4899;"></span> Rosa Chiclete
+                            </button>
+                            <button type="button" class="swatch-btn" onclick="setGirlOutfit('roxo', this)">
+                                <span class="color-dot" style="background:#9333ea;"></span> Roxo Mágico
+                            </button>
+                            <button type="button" class="swatch-btn" onclick="setGirlOutfit('amarelo', this)">
+                                <span class="color-dot" style="background:#eab308;"></span> Amarelo Estrela
+                            </button>
+                            <button type="button" class="swatch-btn" onclick="setGirlOutfit('turquesa', this)">
+                                <span class="color-dot" style="background:#0d9488;"></span> Turquesa Mar
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="customizer-row" style="margin-bottom: 0;">
+                        <label>Estilo de Boné e Acessório</label>
+                        <div class="swatch-group" id="hat-swatches">
+                            <button type="button" class="swatch-btn active" onclick="setHatStyle('vermelho', this)">
+                                <span class="color-dot" style="background:#dc2626;"></span> Rubi
+                            </button>
+                            <button type="button" class="swatch-btn" onclick="setHatStyle('dourado', this)">
+                                <span class="color-dot" style="background:#f59e0b;"></span> Dourado
+                            </button>
+                            <button type="button" class="swatch-btn" onclick="setHatStyle('ciano', this)">
+                                <span class="color-dot" style="background:#06b6d4;"></span> Celeste
+                            </button>
+                            <button type="button" class="swatch-btn" onclick="setHatStyle('preto', this)">
+                                <span class="color-dot" style="background:#1e293b;"></span> Noite
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <button class="btn" onclick="startQuiz()">Começar Travessia 👦👧🌉</button>
+            <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <button class="btn" onclick="startQuiz()">Começar Travessia (25 Frases) 🌉</button>
+                <button class="btn btn-secondary" onclick="openRankingModal()">🏆 Ver Ranking da Turma</button>
+            </div>
         </div>
 
         <!-- Quiz Screen -->
         <div id="quiz-screen" class="card hidden">
             <div class="top-bar">
-                <span id="question-counter" style="font-weight: 800; color: #0284c7; font-size: 0.9rem; text-transform: uppercase;">Passo 1 de 15</span>
-                <span id="score-badge" class="badge">Pontos: 0</span>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <span id="question-counter" style="font-weight: 800; color: #0284c7; font-size: 0.9rem; text-transform: uppercase;">Passo 1 de 25</span>
+                    <span id="active-mode-badge" class="badge-mode">🧘‍♂️ Modo Reflexão</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                    <div id="timer-display" class="timer-box hidden">
+                        ⏱️ <span id="timer-seconds">15</span>s
+                    </div>
+                    <span id="score-badge" class="badge">Pontos: 0</span>
+                    <button class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 10px;" onclick="restartCurrentQuiz()">🔄 Recomeçar</button>
+                </div>
+            </div>
+
+            <div id="timer-bar-container" class="timer-bar-wrap hidden">
+                <div id="timer-bar-fill" class="timer-bar-fill"></div>
             </div>
 
             <!-- Interactive Bridge Graphic -->
@@ -509,7 +817,7 @@
                 <div class="bank bank-left"></div>
                 <div class="bridge-rail"></div>
                 <div id="bridge-planks" class="bridge-structure"></div>
-                <div id="characters-sprite" class="characters">👦👧</div>
+                <div id="characters-sprite" class="characters"></div>
                 <div class="bank bank-right"></div>
                 <div class="tree tree-right">🌳🌟</div>
                 <div class="water-waves">≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈ ≈</div>
@@ -525,52 +833,72 @@
 
             <div id="feedback-box" class="feedback hidden"></div>
 
-            <div style="text-align: right;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <button class="btn btn-secondary" style="padding: 10px 18px; font-size: 0.88rem;" onclick="goHome()">🏠 Página Inicial</button>
                 <button id="next-btn" class="btn hidden" onclick="nextQuestion()">Dar Próximo Passo ➡️</button>
             </div>
         </div>
 
         <!-- Result Screen -->
         <div id="result-screen" class="card text-center hidden">
-            <div style="font-size: 3.4rem; margin-bottom: 8px;">🎉👦👧🌳</div>
-            <h2 style="font-size: 1.8rem; color: #0c4a6e; margin-bottom: 6px;">Travessia Concluída!</h2>
+            <div id="result-avatars" style="display: flex; justify-content: center; margin-bottom: 10px;"></div>
+            <h2 style="font-size: 1.8rem; color: #0c4a6e; margin-bottom: 6px;">🎉 Travessia Concluída!</h2>
             <p id="result-student-info" style="color: #475569; font-weight: 600; font-size: 0.95rem;"></p>
 
             <div class="score-display">
-                <span style="font-size: 0.78rem; font-weight: 700; text-transform: uppercase; color: #0284c7;">Pontuação Final</span>
-                <span id="final-score" class="score-number">0 / 15</span>
-                <p id="final-message" style="font-size: 0.85rem; color: #334155;"></p>
+                <span id="result-mode-tag" style="font-size: 0.76rem; font-weight: 700; text-transform: uppercase; color: #0284c7;">Pontuação Final</span>
+                <span id="final-score" class="score-number">0 pts</span>
+                <p id="final-accuracy" style="font-size: 0.88rem; font-weight: 700; color: #0f172a; margin-bottom: 4px;"></p>
+                <p id="final-message" style="font-size: 0.84rem; color: #334155;"></p>
             </div>
 
             <div class="ranking-box">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
                     <h3 style="font-size: 1.1rem; color: #0c4a6e;">🏆 Ranking da Turma</h3>
-                    <span style="font-size: 0.75rem; color: #64748b;">Salvo neste dispositivo</span>
+                    <span style="font-size: 0.75rem; color: #64748b;">Classificação Geral</span>
                 </div>
                 <div id="ranking-list"></div>
             </div>
 
             <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
-                <button class="btn" onclick="restartQuiz()">Jogar Novamente 🔄</button>
-                <button class="btn btn-secondary" onclick="reviewAnswers()">Revisar Frases 📋</button>
+                <button class="btn" onclick="goHome()">🏠 Página Inicial / Novo Jogo</button>
+                <button class="btn btn-secondary" onclick="restartCurrentQuiz()">🔄 Jogar Novamente</button>
+                <button class="btn btn-secondary" onclick="reviewAnswers()">📋 Revisar as 25 Frases</button>
+            </div>
+        </div>
+
+        <!-- Dedicated Ranking Screen -->
+        <div id="ranking-screen" class="card hidden">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                <h2 style="font-size: 1.5rem; color: #0c4a6e;">🏆 Ranking Geral da Turma</h2>
+                <button class="btn btn-danger" onclick="clearLeaderboard()">🗑️ Limpar Ranking</button>
+            </div>
+            <p style="font-size: 0.9rem; color: #475569; margin-bottom: 16px;">
+                Confira a pontuação dos estudantes nos modos Reflexão e Desafio (1º ao 5º Ano):
+            </p>
+            <div id="standalone-ranking-list" style="margin-bottom: 24px;"></div>
+            <div class="text-center">
+                <button class="btn" onclick="goHome()">🏠 Voltar à Página Inicial</button>
             </div>
         </div>
 
         <!-- Review Screen -->
         <div id="review-screen" class="card hidden">
-            <h2 style="font-size: 1.5rem; color: #0c4a6e; margin-bottom: 18px; text-align: center;">Revisão das Frases</h2>
+            <h2 style="font-size: 1.5rem; color: #0c4a6e; margin-bottom: 18px; text-align: center;">Revisão das 25 Frases</h2>
             <div id="review-list" style="margin-bottom: 20px;"></div>
-            <div class="text-center">
+            <div style="display: flex; justify-content: center; gap: 12px;">
                 <button class="btn" onclick="backToResult()">Voltar ao Resultado</button>
+                <button class="btn btn-secondary" onclick="goHome()">🏠 Página Inicial</button>
             </div>
         </div>
     </main>
 
     <footer>
-        EEIEF Antônio Albuquerque Sousa Filho • Professor Robson Dias
+        A Ponte das Conjunções • Atividade Pedagógica Gamificada (1º ao 5º Ano)
     </footer>
 
     <script>
+        // 25 Sentences covering Coordinating & Subordinating Conjunctions suitable for 1st-5th Grade
         const questions = [
             {
                 number: 1,
@@ -588,112 +916,373 @@
             },
             {
                 number: 3,
-                sentence: "Você prefere suco [BLANK] refrigerante?",
+                sentence: "Você prefere tomar suco [BLANK] refrigerante no lanche?",
                 correct: "ou",
                 options: ["ou", "e", "pois", "logo"],
                 rationale: "A conjunção 'ou' indica alternância ou escolha entre duas opções."
             },
             {
                 number: 4,
-                sentence: "Maria não foi à escola, [BLANK] estava doente.",
+                sentence: "Maria não foi à escola hoje, [BLANK] estava com febre.",
                 correct: "porque",
                 options: ["porque", "mas", "então", "nem"],
                 rationale: "A conjunção 'porque' explica a causa ou motivo de Maria não ter ido à escola."
             },
             {
                 number: 5,
-                sentence: "O aluno leu o texto [BLANK] respondeu às questões.",
+                sentence: "O estudante abriu o caderno [BLANK] copiou a lição do quadro.",
                 correct: "e",
                 options: ["e", "mas", "ou", "porém"],
-                rationale: "A conjunção 'e' adiciona e soma duas ações feitas pelo aluno."
+                rationale: "A conjunção 'e' adiciona e soma duas ações feitas pelo estudante."
             },
             {
                 number: 6,
-                sentence: "Não gosto de mentira, [BLANK] de injustiça.",
+                sentence: "Não gosto de mentira, [BLANK] de falta de educação.",
                 correct: "nem",
                 options: ["nem", "e", "mas", "portanto"],
                 rationale: "A conjunção 'nem' adiciona uma segunda ideia negativa ('e não')."
             },
             {
                 number: 7,
-                sentence: "Choveu muito, [BLANK] o jogo foi cancelado.",
+                sentence: "Choveu muito forte à tarde, [BLANK] o passeio foi adiado.",
                 correct: "portanto",
                 options: ["portanto", "mas", "porque", "ou"],
                 rationale: "A conjunção 'portanto' indica a conclusão ou consequência da chuva forte."
             },
             {
                 number: 8,
-                sentence: "Ana queria sair, [BLANK] sua mãe não deixou.",
+                sentence: "Ana queria ir ao parque, [BLANK] sua mãe pediu que arrumasse o quarto.",
                 correct: "porém",
                 options: ["porém", "e", "logo", "pois"],
                 rationale: "A conjunção 'porém' expressa contraste ou oposição."
             },
             {
                 number: 9,
-                sentence: "Preste atenção, [BLANK] a explicação é importante.",
+                sentence: "Preste bastante atenção na aula, [BLANK] esse conteúdo é muito importante.",
                 correct: "pois",
                 options: ["pois", "mas", "ou", "então"],
                 rationale: "A conjunção 'pois' justifica por que é necessário prestar atenção."
             },
             {
                 number: 10,
-                sentence: "Ele treinou todos os dias, [BLANK] venceu a competição.",
+                sentence: "O time treinou todos os dias com dedicação, [BLANK] venceu o campeonato.",
                 correct: "logo",
                 options: ["logo", "mas", "nem", "porque"],
-                rationale: "A conjunção 'logo' introduz a conclusão lógica de ter treinado todos os dias."
+                rationale: "A conjunção 'logo' introduz a conclusão lógica de ter treinado com dedicação."
             },
             {
                 number: 11,
-                sentence: "Pedro é inteligente, [BLANK] precisa estudar mais.",
+                sentence: "Pedro tem muita facilidade em matemática, [BLANK] precisa praticar mais leitura.",
                 correct: "entretanto",
                 options: ["entretanto", "e", "ou", "portanto"],
-                rationale: "A conjunção 'entretanto' apresenta uma ressalva ou oposição."
+                rationale: "A conjunção 'entretanto' apresenta uma ressalva ou ideia contrária."
             },
             {
                 number: 12,
-                sentence: "Você deve escolher: [BLANK] faz a atividade agora, [BLANK] deixa para depois.",
+                sentence: "Você deve decidir agora: [BLANK] brinca no pátio, [BLANK] joga dama na sala.",
                 correct: "ou / ou",
                 options: ["ou / ou", "e / e", "mas / mas", "nem / nem"],
-                rationale: "O par 'ou... ou' indica alternância entre duas escolhas."
+                rationale: "O par 'ou... ou' indica alternância entre duas escolhas possíveis."
             },
             {
                 number: 13,
-                sentence: "O filme era longo, [BLANK] foi muito interessante.",
+                sentence: "O livro de aventuras era bem grande, [BLANK] a história era super divertida.",
                 correct: "contudo",
                 options: ["contudo", "e", "porque", "logo"],
-                rationale: "A conjunção 'contudo' indica oposição entre ser longo e mesmo assim ser interessante."
+                rationale: "A conjunção 'contudo' indica oposição entre o livro ser grande e ainda assim muito divertido."
             },
             {
                 number: 14,
-                sentence: "Ela estava cansada, [BLANK] continuou ajudando os colegas.",
+                sentence: "A gatinha estava com sono, [BLANK] continuou brincando com o novelo de lã.",
                 correct: "mas",
                 options: ["mas", "ou", "portanto", "pois"],
-                rationale: "A conjunção 'mas' destaca o contraste entre o cansaço e o ato de continuar ajudando."
+                rationale: "A conjunção 'mas' destaca o contraste entre estar com sono e continuar brincando."
             },
             {
                 number: 15,
-                sentence: "A turma se organizou bem, [BLANK] apresentou um ótimo trabalho.",
+                sentence: "A turma inteira colaborou na limpeza, [BLANK] a sala ficou brilhando.",
                 correct: "então",
                 options: ["então", "mas", "nem", "porque"],
-                rationale: "A conjunção 'então' mostra a conclusão positiva da organização da turma."
+                rationale: "A conjunção 'então' mostra a conclusão positiva da colaboração da turma."
+            },
+            {
+                number: 16,
+                sentence: "Camila lavou as maçãs [BLANK] colocou todas na cesta de piquenique.",
+                correct: "e",
+                options: ["e", "porém", "ou", "porque"],
+                rationale: "A conjunção 'e' soma duas ações realizadas em sequência."
+            },
+            {
+                number: 17,
+                sentence: "Leve o guarda-chuva na mochila, [BLANK] o céu está cheio de nuvens escuras.",
+                correct: "porque",
+                options: ["porque", "mas", "ou", "contudo"],
+                rationale: "A conjunção 'porque' explica a razão de levar o guarda-chuva."
+            },
+            {
+                number: 18,
+                sentence: "O cachorrinho correu até o portão, [BLANK] não conseguiu alcançar o carteiro.",
+                correct: "todavia",
+                options: ["todavia", "portanto", "e", "pois"],
+                rationale: "A conjunção 'todavia' equivale a 'mas' ou 'porém', indicando oposição."
+            },
+            {
+                number: 19,
+                sentence: "Nós podemos pintar o cartaz com guache [BLANK] usar lápis de cor.",
+                correct: "ou",
+                options: ["ou", "mas", "logo", "porque"],
+                rationale: "A conjunção 'ou' apresenta duas alternativas para colorir o cartaz."
+            },
+            {
+                number: 20,
+                sentence: "As plantas do jardim receberam água e sol, [BLANK] cresceram cheias de flores.",
+                correct: "por isso",
+                options: ["por isso", "porém", "nem", "ou"],
+                rationale: "A expressão 'por isso' indica o resultado positivo de receberem água e sol."
+            },
+            {
+                number: 21,
+                sentence: "Lucas não comeu o bolo de chocolate [BLANK] bebeu o suco de laranja.",
+                correct: "nem",
+                options: ["nem", "mas", "portanto", "ou"],
+                rationale: "A conjunção 'nem' liga duas ações negativas ('não comeu e não bebeu')."
+            },
+            {
+                number: 22,
+                sentence: "O despertador tocou bem cedo, [BLANK] Rafael levantou-se depressa.",
+                correct: "então",
+                options: ["então", "mas", "ou", "entretanto"],
+                rationale: "A conjunção 'então' mostra a ação consequente ao toque do despertador."
+            },
+            {
+                number: 23,
+                sentence: "Não deixe o brinquedo no chão, [BLANK] alguém pode tropeçar nele.",
+                correct: "pois",
+                options: ["pois", "mas", "contudo", "nem"],
+                rationale: "A conjunção 'pois' apresenta a explicação do cuidado ao guardar o brinquedo."
+            },
+            {
+                number: 24,
+                sentence: "O vento soprava forte na praia, [BLANK] as crianças soltavam pipa com alegria.",
+                correct: "e",
+                options: ["e", "ou", "porque", "nem"],
+                rationale: "A conjunção 'e' une duas cenas que acontecem ao mesmo tempo na praia."
+            },
+            {
+                number: 25,
+                sentence: "Você terminou todas as frases da ponte, [BLANK] ajudou os colegas na travessia!",
+                correct: "portanto",
+                options: ["portanto", "mas", "nem", "ou"],
+                rationale: "A conjunção 'portanto' conclui com sucesso a sua grande missão na Ponte das Conjunções!"
             }
         ];
 
+        // Outfit color palettes
+        const boyPalettes = {
+            azul: { shirt: "#2563eb", stripe: "#93c5fd", pants: "#1e3a8a" },
+            verde: { shirt: "#16a34a", stripe: "#86efac", pants: "#14532d" },
+            vermelho: { shirt: "#dc2626", stripe: "#fca5a5", pants: "#334155" },
+            laranja: { shirt: "#ea580c", stripe: "#fed7aa", pants: "#1e293b" }
+        };
+
+        const girlPalettes = {
+            rosa: { dress: "#ec4899", belt: "#fbcfe8", shoes: "#db2777" },
+            roxo: { dress: "#9333ea", belt: "#e9d5ff", shoes: "#6b21a8" },
+            amarelo: { dress: "#eab308", belt: "#fef08a", shoes: "#ca8a04" },
+            turquesa: { dress: "#0d9488", belt: "#99f6e4", shoes: "#115e59" }
+        };
+
+        const hatPalettes = {
+            vermelho: "#dc2626",
+            dourado: "#f59e0b",
+            ciano: "#06b6d4",
+            preto: "#1e293b"
+        };
+
+        let avatarConfig = {
+            boy: boyPalettes.azul,
+            girl: girlPalettes.rosa,
+            hat: hatPalettes.vermelho
+        };
+
+        let gameMode = "reflexao"; // 'reflexao' or 'desafio'
         let currentQuestionIndex = 0;
         let score = 0;
-        let studentData = { name: "", grade: "Ensino Fundamental", turma: "Turma C" };
+        let correctCount = 0;
+        let timerInterval = null;
+        let timeLeft = 15;
+        const CHALLENGE_TIME = 15;
+
+        let studentData = { name: "", grade: "5º Ano", turma: "Turma C" };
         let userAnswers = new Array(questions.length).fill(null);
 
         const defaultLeaderboard = [
-            { name: "Ana Beatriz", score: 15, turma: "Turma C" },
-            { name: "Lucas Gabriel", score: 14, turma: "Turma C" },
-            { name: "Mariana Souza", score: 13, turma: "Turma C" },
-            { name: "João Pedro", score: 12, turma: "Turma C" }
+            { name: "Ana Beatriz", score: 340, accuracy: "25/25", grade: "5º Ano", turma: "Turma C", mode: "Desafio ⚡" },
+            { name: "Lucas Gabriel", score: 250, accuracy: "25/25", grade: "4º Ano", turma: "Turma B", mode: "Reflexão 🧘‍♂️" },
+            { name: "Mariana Souza", score: 230, accuracy: "23/25", grade: "3º Ano", turma: "Turma C", mode: "Reflexão 🧘‍♂️" },
+            { name: "João Pedro", score: 215, accuracy: "20/25", grade: "2º Ano", turma: "Turma A", mode: "Desafio ⚡" }
         ];
+
+        function buildAvatarSVG() {
+            const b = avatarConfig.boy;
+            const g = avatarConfig.girl;
+            const h = avatarConfig.hat;
+            return `
+            <svg viewBox="0 0 84 72" xmlns="http://www.w3.org/2000/svg">
+                <!-- JOÃO (Full Body Boy) -->
+                <g transform="translate(4, 4)">
+                    <rect x="10" y="46" width="5" height="16" rx="2.5" fill="${b.pants}"/>
+                    <rect x="19" y="46" width="5" height="16" rx="2.5" fill="${b.pants}"/>
+                    <rect x="8" y="60" width="8" height="4" rx="2" fill="${h}"/>
+                    <rect x="18" y="60" width="8" height="4" rx="2" fill="${h}"/>
+                    <rect x="8" y="26" width="18" height="22" rx="5" fill="${b.shirt}"/>
+                    <rect x="11" y="32" width="12" height="3" rx="1.5" fill="${b.stripe}"/>
+                    <rect x="3" y="27" width="5" height="16" rx="2.5" transform="rotate(14 5 27)" fill="#ffedd5"/>
+                    <rect x="25" y="27" width="5" height="16" rx="2.5" transform="rotate(-22 27 27)" fill="#ffedd5"/>
+                    <circle cx="17" cy="14" r="10.5" fill="#ffedd5"/>
+                    <path d="M6.5 13 C6.5 5, 27.5 5, 27.5 13 Z" fill="#78350f"/>
+                    <rect x="15" y="9" width="15" height="3.5" rx="1.5" fill="${h}"/>
+                    <circle cx="13.5" cy="15" r="1.4" fill="#1e293b"/>
+                    <circle cx="20.5" cy="15" r="1.4" fill="#1e293b"/>
+                    <path d="M13.5 19 Q17 22 20.5 19" stroke="#1e293b" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+                </g>
+
+                <!-- MARIA (Full Body Girl) -->
+                <g transform="translate(42, 4)">
+                    <circle cx="5" cy="13" r="4.5" fill="#92400e"/>
+                    <circle cx="31" cy="13" r="4.5" fill="#92400e"/>
+                    <rect x="12" y="46" width="4.5" height="16" rx="2" fill="#ffedd5"/>
+                    <rect x="20" y="46" width="4.5" height="16" rx="2" fill="#ffedd5"/>
+                    <rect x="10.5" y="60" width="7" height="4" rx="2" fill="${g.shoes}"/>
+                    <rect x="19.5" y="60" width="7" height="4" rx="2" fill="${g.shoes}"/>
+                    <path d="M9 26 L27 26 L32 48 L4 48 Z" rx="3" fill="${g.dress}"/>
+                    <rect x="9.5" y="35" width="17" height="3" fill="${g.belt}"/>
+                    <rect x="4" y="27" width="4.5" height="16" rx="2.2" transform="rotate(22 6 27)" fill="#ffedd5"/>
+                    <rect x="27" y="27" width="4.5" height="16" rx="2.2" transform="rotate(-14 29 27)" fill="#ffedd5"/>
+                    <circle cx="18" cy="14" r="10.5" fill="#ffedd5"/>
+                    <path d="M7.5 14 C7.5 4, 28.5 4, 28.5 14 C25 10, 11 10, 7.5 14 Z" fill="#92400e"/>
+                    <circle cx="25" cy="8" r="2.8" fill="${h}"/>
+                    <circle cx="14.5" cy="15" r="1.4" fill="#1e293b"/>
+                    <circle cx="21.5" cy="15" r="1.4" fill="#1e293b"/>
+                    <path d="M14.5 19 Q18 22 21.5 19" stroke="#1e293b" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+                </g>
+            </svg>`;
+        }
+
+        function refreshAvatars() {
+            const svgMarkup = buildAvatarSVG();
+            document.getElementById("welcome-avatars").innerHTML = svgMarkup;
+            document.getElementById("characters-sprite").innerHTML = svgMarkup;
+            document.getElementById("result-avatars").innerHTML = `<div style="width:94px;height:84px;">${svgMarkup}</div>`;
+        }
+        refreshAvatars();
+
+        function setBoyOutfit(key, btnEl) {
+            avatarConfig.boy = boyPalettes[key];
+            const btns = document.getElementById("boy-outfit-swatches").querySelectorAll(".swatch-btn");
+            btns.forEach(b => b.classList.remove("active"));
+            btnEl.classList.add("active");
+            refreshAvatars();
+        }
+
+        function setGirlOutfit(key, btnEl) {
+            avatarConfig.girl = girlPalettes[key];
+            const btns = document.getElementById("girl-outfit-swatches").querySelectorAll(".swatch-btn");
+            btns.forEach(b => b.classList.remove("active"));
+            btnEl.classList.add("active");
+            refreshAvatars();
+        }
+
+        function setHatStyle(key, btnEl) {
+            avatarConfig.hat = hatPalettes[key];
+            const btns = document.getElementById("hat-swatches").querySelectorAll(".swatch-btn");
+            btns.forEach(b => b.classList.remove("active"));
+            btnEl.classList.add("active");
+            refreshAvatars();
+        }
+
+        function selectGameMode(mode) {
+            gameMode = mode;
+            document.getElementById("mode-reflexao").classList.toggle("active", mode === "reflexao");
+            document.getElementById("mode-desafio").classList.toggle("active", mode === "desafio");
+        }
+
+        function stopQuestionTimer() {
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        }
+
+        function startQuestionTimer() {
+            stopQuestionTimer();
+            if (gameMode !== "desafio") {
+                document.getElementById("timer-display").classList.add("hidden");
+                document.getElementById("timer-bar-container").classList.add("hidden");
+                return;
+            }
+
+            timeLeft = CHALLENGE_TIME;
+            const timerDisplay = document.getElementById("timer-display");
+            const timerSeconds = document.getElementById("timer-seconds");
+            const timerBarWrap = document.getElementById("timer-bar-container");
+            const timerBarFill = document.getElementById("timer-bar-fill");
+
+            timerDisplay.classList.remove("hidden", "urgent");
+            timerBarWrap.classList.remove("hidden");
+            timerSeconds.innerText = timeLeft;
+            timerBarFill.style.transition = "none";
+            timerBarFill.style.width = "100%";
+
+            setTimeout(() => {
+                timerBarFill.style.transition = "width 1s linear";
+            }, 30);
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timerSeconds.innerText = Math.max(timeLeft, 0);
+                const pct = Math.max((timeLeft / CHALLENGE_TIME) * 100, 0);
+                timerBarFill.style.width = pct + "%";
+
+                if (timeLeft <= 5) {
+                    timerDisplay.classList.add("urgent");
+                }
+
+                if (timeLeft <= 0) {
+                    stopQuestionTimer();
+                    handleTimeOut();
+                }
+            }, 1000);
+        }
+
+        function handleTimeOut() {
+            const q = questions[currentQuestionIndex];
+            const buttons = document.getElementById("options-container").getElementsByTagName("button");
+            for (let b of buttons) {
+                b.disabled = true;
+                if (b.innerText.trim() === q.correct) {
+                    b.classList.add("opt-correct");
+                }
+            }
+
+            userAnswers[currentQuestionIndex] = {
+                text: "Tempo Esgotado ⏱️",
+                isCorrect: false,
+                correctText: q.correct,
+                rationale: q.rationale
+            };
+
+            const feedbackBox = document.getElementById("feedback-box");
+            feedbackBox.classList.remove("hidden");
+            feedbackBox.className = "feedback error";
+            feedbackBox.innerHTML = `<strong>⏱️ O tempo acabou! A conjunção correta era "${q.correct}".</strong><br>${q.rationale}`;
+
+            document.getElementById("next-btn").classList.remove("hidden");
+        }
 
         function getLeaderboard() {
             try {
-                const saved = localStorage.getItem("ponte_conjuncoes_ranking");
+                const saved = localStorage.getItem("ponte_conjuncoes_ranking_v3");
                 return saved ? JSON.parse(saved) : [...defaultLeaderboard];
             } catch (e) {
                 return [...defaultLeaderboard];
@@ -705,9 +1294,81 @@
             list.push(entry);
             list.sort((a, b) => b.score - a.score);
             try {
-                localStorage.setItem("ponte_conjuncoes_ranking", JSON.stringify(list.slice(0, 15)));
+                localStorage.setItem("ponte_conjuncoes_ranking_v3", JSON.stringify(list.slice(0, 40)));
             } catch (e) {}
             return list;
+        }
+
+        function clearLeaderboard() {
+            if (confirm("Tem certeza que deseja limpar o ranking salvo neste dispositivo?")) {
+                try {
+                    localStorage.removeItem("ponte_conjuncoes_ranking_v3");
+                } catch (e) {}
+                renderRankingList("standalone-ranking-list", getLeaderboard());
+            }
+        }
+
+        function renderRankingList(containerId, list, highlightCurrent = false) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = "";
+            if (!list || list.length === 0) {
+                container.innerHTML = `<p style="color:#64748b; text-align:center; padding:12px;">Nenhum registro no ranking ainda.</p>`;
+                return;
+            }
+            list.slice(0, 12).forEach((item, index) => {
+                const row = document.createElement("div");
+                const isCurrent = highlightCurrent && item.name === studentData.name && item.score === score;
+                row.className = "ranking-row" + (isCurrent ? " highlight" : "");
+
+                let medal = `#${index + 1}`;
+                if (index === 0) medal = "🥇";
+                else if (index === 1) medal = "🥈";
+                else if (index === 2) medal = "🥉";
+
+                const gradeInfo = item.grade ? `${item.grade} - ${item.turma}` : item.turma;
+                const modeLabel = item.mode || "Reflexão";
+                const accLabel = item.accuracy ? `(${item.accuracy})` : "";
+
+                row.innerHTML = `
+                    <span>${medal} <strong>${item.name}</strong> <small style="color:#64748b;">• ${gradeInfo} • ${modeLabel}</small></span>
+                    <span style="color:#0369a1; font-weight:800;">${item.score} pts <small style="color:#475569; font-weight:600;">${accLabel}</small></span>
+                `;
+                container.appendChild(row);
+            });
+        }
+
+        function hideAllScreens() {
+            stopQuestionTimer();
+            document.getElementById("welcome-screen").classList.add("hidden");
+            document.getElementById("quiz-screen").classList.add("hidden");
+            document.getElementById("result-screen").classList.add("hidden");
+            document.getElementById("ranking-screen").classList.add("hidden");
+            document.getElementById("review-screen").classList.add("hidden");
+        }
+
+        function goHome() {
+            currentQuestionIndex = 0;
+            score = 0;
+            correctCount = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            hideAllScreens();
+            document.getElementById("welcome-screen").classList.remove("hidden");
+        }
+
+        function restartCurrentQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            correctCount = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            hideAllScreens();
+            document.getElementById("quiz-screen").classList.remove("hidden");
+            loadQuestion();
+        }
+
+        function openRankingModal() {
+            hideAllScreens();
+            renderRankingList("standalone-ranking-list", getLeaderboard(), false);
+            document.getElementById("ranking-screen").classList.remove("hidden");
         }
 
         function renderBridge() {
@@ -720,22 +1381,34 @@
                 else if (i === currentQuestionIndex) plank.classList.add("current");
                 container.appendChild(plank);
             }
-            // Move characters across the bridge (from 6% to 82%)
             const sprite = document.getElementById("characters-sprite");
-            const percent = 6 + (currentQuestionIndex / questions.length) * 74;
+            const percent = 4 + (currentQuestionIndex / questions.length) * 76;
             sprite.style.left = percent + "%";
         }
 
         function startQuiz() {
             const nameInput = document.getElementById("student-name").value.trim();
             if (!nameInput) {
-                alert("Por favor, digite seu nome antes de começar!");
+                alert("Por favor, digite seu nome ou apelido antes de começar!");
                 return;
             }
             studentData.name = nameInput;
+            studentData.grade = document.getElementById("student-grade").value;
             studentData.turma = document.getElementById("student-class").value;
 
-            document.getElementById("welcome-screen").classList.add("hidden");
+            currentQuestionIndex = 0;
+            score = 0;
+            correctCount = 0;
+            userAnswers = new Array(questions.length).fill(null);
+
+            const modeBadge = document.getElementById("active-mode-badge");
+            if (gameMode === "desafio") {
+                modeBadge.innerText = "⚡ Modo Desafio (15s)";
+            } else {
+                modeBadge.innerText = "🧘‍♂️ Modo Reflexão";
+            }
+
+            hideAllScreens();
             document.getElementById("quiz-screen").classList.remove("hidden");
             loadQuestion();
         }
@@ -746,7 +1419,7 @@
             document.getElementById("score-badge").innerText = `Pontos: ${score}`;
 
             const progressPercent = ((currentQuestionIndex) / questions.length) * 100;
-            document.getElementById("progress-bar").style.width = `${Math.max(progressPercent, 7)}%`;
+            document.getElementById("progress-bar").style.width = `${Math.max(progressPercent, 4)}%`;
 
             renderBridge();
 
@@ -754,7 +1427,7 @@
             const formattedSentence = q.sentence.replace(/\[BLANK\]/g, '<span class="blank-slot">_______</span>');
 
             qContainer.innerHTML = `
-                <span class="question-instruction">Escolha a conjunção correta para firmar a tábua da ponte:</span>
+                <span class="question-instruction">Escolha a conjunção correta para firmar a tábua ${q.number} da ponte:</span>
                 <div class="sentence-text">${formattedSentence}</div>
             `;
 
@@ -773,9 +1446,13 @@
 
             document.getElementById("feedback-box").classList.add("hidden");
             document.getElementById("next-btn").classList.add("hidden");
+
+            startQuestionTimer();
         }
 
         function selectOption(selectedOpt, selectedBtn, correctOpt, rationale) {
+            stopQuestionTimer();
+
             const buttons = document.getElementById("options-container").getElementsByTagName("button");
             for (let b of buttons) {
                 b.disabled = true;
@@ -791,9 +1468,19 @@
 
             if (isCorrect) {
                 selectedBtn.classList.add("opt-correct");
+                correctCount++;
+
+                let pointsEarned = 10;
+                let bonusText = "";
+                if (gameMode === "desafio") {
+                    const speedBonus = Math.max(timeLeft, 0);
+                    pointsEarned += speedBonus;
+                    bonusText = ` <em>(+10 pts + ${speedBonus} pts de bônus de velocidade!)</em>`;
+                }
+                score += pointsEarned;
+
                 feedbackBox.className = "feedback success";
-                feedbackBox.innerHTML = `<strong>🌉 Passo firme! Você acertou!</strong><br>${rationale}`;
-                score++;
+                feedbackBox.innerHTML = `<strong>🌉 Passo firme! Você acertou!${bonusText}</strong><br>${rationale}`;
 
                 sprite.classList.remove("hop");
                 void sprite.offsetWidth;
@@ -808,7 +1495,7 @@
                     }
                 }
                 feedbackBox.className = "feedback error";
-                feedbackBox.innerHTML = `<strong>⚠️ Quase! A tábua correta era "${correctOpt}".</strong><br>${rationale}`;
+                feedbackBox.innerHTML = `<strong>⚠️ Quase! A conjunção correta era "${correctOpt}".</strong><br>${rationale}`;
             }
 
             document.getElementById("score-badge").innerText = `Pontos: ${score}`;
@@ -825,50 +1512,35 @@
         }
 
         function showResults() {
-            document.getElementById("quiz-screen").classList.add("hidden");
+            hideAllScreens();
             document.getElementById("result-screen").classList.remove("hidden");
-            document.getElementById("result-student-info").innerText = `Estudante: ${studentData.name} • ${studentData.grade} (${studentData.turma})`;
-            document.getElementById("final-score").innerText = `${score} / ${questions.length}`;
 
-            let msg = "Incrível! João e Maria atravessaram a ponte com perfeição!";
-            if (score <= 8) msg = "Bom esforço! Continue praticando as conjunções.";
-            else if (score <= 12) msg = "Muito bem! Ótimo domínio das conjunções!";
+            const modeTitle = gameMode === "desafio" ? "Modo Desafio ⚡" : "Modo Reflexão 🧘‍♂️";
+            document.getElementById("result-mode-tag").innerText = `Pontuação Final • ${modeTitle}`;
+            document.getElementById("result-student-info").innerText = `Estudante: ${studentData.name} • ${studentData.grade} (${studentData.turma})`;
+            document.getElementById("final-score").innerText = `${score} pts`;
+            document.getElementById("final-accuracy").innerText = `Acertos na Travessia: ${correctCount} de ${questions.length} frases`;
+
+            let msg = "Incrível! João e Maria atravessaram as 25 tábuas da ponte com perfeição!";
+            if (correctCount <= 14) msg = "Bom esforço! Continue praticando as conjunções para firmar cada vez mais a ponte.";
+            else if (correctCount <= 21) msg = "Muito bem! Excelente domínio das conjunções na travessia!";
             document.getElementById("final-message").innerText = msg;
 
-            const updatedList = saveToLeaderboard({ name: studentData.name, score: score, turma: studentData.turma });
-
-            const rankingList = document.getElementById("ranking-list");
-            rankingList.innerHTML = "";
-            updatedList.slice(0, 6).forEach((item, index) => {
-                const row = document.createElement("div");
-                row.className = "ranking-row" + (item.name === studentData.name && item.score === score ? " highlight" : "");
-
-                let medal = `#${index + 1}`;
-                if (index === 0) medal = "🥇";
-                else if (index === 1) medal = "🥈";
-                else if (index === 2) medal = "🥉";
-
-                row.innerHTML = `
-                    <span>${medal} ${item.name} <small style="color:#64748b;">(${item.turma})</small></span>
-                    <span style="color:#0369a1; font-weight:800;">${item.score} pts</span>
-                `;
-                rankingList.appendChild(row);
+            const updatedList = saveToLeaderboard({
+                name: studentData.name,
+                score: score,
+                accuracy: `${correctCount}/${questions.length}`,
+                grade: studentData.grade,
+                turma: studentData.turma,
+                mode: modeTitle
             });
 
-            fireConfetti(110);
-        }
-
-        function restartQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            userAnswers = new Array(questions.length).fill(null);
-            document.getElementById("result-screen").classList.add("hidden");
-            document.getElementById("welcome-screen").classList.remove("hidden");
-            document.getElementById("student-name").value = "";
+            renderRankingList("ranking-list", updatedList, true);
+            fireConfetti(120);
         }
 
         function reviewAnswers() {
-            document.getElementById("result-screen").classList.add("hidden");
+            hideAllScreens();
             document.getElementById("review-screen").classList.remove("hidden");
 
             const reviewList = document.getElementById("review-list");
@@ -897,11 +1569,11 @@
         }
 
         function backToResult() {
-            document.getElementById("review-screen").classList.add("hidden");
+            hideAllScreens();
             document.getElementById("result-screen").classList.remove("hidden");
         }
 
-        // Offline Native Confetti Engine (zero external scripts needed)
+        // Offline Native Confetti Engine
         const canvas = document.getElementById("confetti-canvas");
         const ctx = canvas.getContext("2d");
         let particles = [];
@@ -938,7 +1610,7 @@
             particles.forEach((p) => {
                 p.x += p.vx;
                 p.y += p.vy;
-                p.vy += 0.38; // gravity
+                p.vy += 0.38;
                 p.rotation += p.vr;
                 p.alpha -= 0.012;
 
